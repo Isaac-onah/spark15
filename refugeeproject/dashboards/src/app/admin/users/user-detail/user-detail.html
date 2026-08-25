@@ -1,0 +1,195 @@
+<div class="space-y-6">
+  <app-breadcrumb [items]="[{label: 'Dashboard', route: '/admin/dashboard'}, {label: 'Users', route: '/admin/users'}, {label: user().name, route: ''}]"></app-breadcrumb>
+
+  <!-- Profile Header Card -->
+  <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+    <div class="p-6 sm:p-8">
+      <div class="sm:flex sm:items-center sm:justify-between">
+        <div class="sm:flex sm:space-x-5">
+          <div class="flex-shrink-0">
+            <div class="mx-auto h-20 w-20 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-700 font-bold text-3xl">
+              {{ user().name.charAt(0) }}
+            </div>
+          </div>
+          <div class="mt-4 text-center sm:mt-0 sm:pt-1 sm:text-left">
+            <p class="text-sm font-medium text-gray-600">User Profile</p>
+            <p class="text-xl font-bold text-gray-900 sm:text-2xl">{{ user().name }}</p>
+            <div class="mt-1 flex flex-col sm:flex-row sm:flex-wrap sm:space-x-6">
+              <div class="mt-2 flex items-center text-sm text-gray-500">
+                <svg class="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
+                  <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
+                  <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
+                </svg>
+                {{ user().email }}
+              </div>
+              <div class="mt-2 flex items-center text-sm text-gray-500">
+                <svg class="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M2 3.5A1.5 1.5 0 013.5 2h1.148a1.5 1.5 0 011.465 1.175l.716 3.223a1.5 1.5 0 01-1.052 1.767l-.933.267c-.41.117-.643.555-.48.95a11.542 11.542 0 006.254 6.254c.395.163.833-.07.95-.48l.267-.933a1.5 1.5 0 011.767-1.052l3.223.716A1.5 1.5 0 0118 15.352V16.5a1.5 1.5 0 01-1.5 1.5H15c-1.149 0-2.263-.15-3.326-.43A13.022 13.022 0 012.43 8.326 13.019 13.019 0 012 5V3.5z" clip-rule="evenodd" />
+                </svg>
+                {{ user().phone }}
+              </div>
+              <div class="mt-2 flex items-center text-sm text-gray-500">
+                <app-status-badge [status]="user().accountStatus"></app-status-badge>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="mt-5 flex justify-center sm:mt-0 space-x-3">
+          <button type="button" class="inline-flex items-center justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+            Edit
+          </button>
+          <button type="button" class="inline-flex items-center justify-center rounded-md border border-transparent bg-rose-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-rose-700 focus:outline-none focus:ring-2 focus:ring-rose-500 focus:ring-offset-2">
+            Suspend
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tab Navigation -->
+  <div class="border-b border-gray-200">
+    <nav class="-mb-px flex space-x-8" aria-label="Tabs">
+      <button (click)="setTab('overview')" [class.border-indigo-500]="activeTab() === 'overview'" [class.text-indigo-600]="activeTab() === 'overview'" [class.border-transparent]="activeTab() !== 'overview'" [class.text-gray-500]="activeTab() !== 'overview'" class="whitespace-nowrap border-b-2 py-4 px-1 text-sm font-medium hover:border-gray-300 hover:text-gray-700">
+        Overview
+      </button>
+      <button (click)="setTab('bookings')" [class.border-indigo-500]="activeTab() === 'bookings'" [class.text-indigo-600]="activeTab() === 'bookings'" [class.border-transparent]="activeTab() !== 'bookings'" [class.text-gray-500]="activeTab() !== 'bookings'" class="whitespace-nowrap border-b-2 py-4 px-1 text-sm font-medium hover:border-gray-300 hover:text-gray-700">
+        Bookings
+      </button>
+      <button (click)="setTab('activity')" [class.border-indigo-500]="activeTab() === 'activity'" [class.text-indigo-600]="activeTab() === 'activity'" [class.border-transparent]="activeTab() !== 'activity'" [class.text-gray-500]="activeTab() !== 'activity'" class="whitespace-nowrap border-b-2 py-4 px-1 text-sm font-medium hover:border-gray-300 hover:text-gray-700">
+        Activity Log
+      </button>
+    </nav>
+  </div>
+
+  <!-- Tab Content -->
+  <div [ngSwitch]="activeTab()">
+    <!-- Overview Tab -->
+    <div *ngSwitchCase="'overview'" class="grid grid-cols-1 gap-6 lg:grid-cols-3">
+      <div class="lg:col-span-2 space-y-6">
+        <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+          <h3 class="text-lg font-medium leading-6 text-gray-900 mb-4">Profile Information</h3>
+          <dl class="grid grid-cols-1 gap-x-4 gap-y-6 sm:grid-cols-2">
+            <div class="sm:col-span-1">
+              <dt class="text-sm font-medium text-gray-500">Full name</dt>
+              <dd class="mt-1 text-sm text-gray-900">{{ user().name }}</dd>
+            </div>
+            <div class="sm:col-span-1">
+              <dt class="text-sm font-medium text-gray-500">Location</dt>
+              <dd class="mt-1 text-sm text-gray-900">{{ user().location }}</dd>
+            </div>
+            <div class="sm:col-span-2">
+              <dt class="text-sm font-medium text-gray-500">Address</dt>
+              <dd class="mt-1 text-sm text-gray-900">{{ user().address }}</dd>
+            </div>
+            <div class="sm:col-span-2">
+              <dt class="text-sm font-medium text-gray-500">Bio</dt>
+              <dd class="mt-1 text-sm text-gray-900">{{ user().bio }}</dd>
+            </div>
+          </dl>
+        </div>
+      </div>
+      
+      <div class="space-y-6">
+        <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+          <h3 class="text-lg font-medium leading-6 text-gray-900 mb-4">Account Stats</h3>
+          <dl class="space-y-4">
+            <div class="flex justify-between">
+              <dt class="text-sm font-medium text-gray-500">Total Bookings</dt>
+              <dd class="text-sm text-gray-900 font-semibold">{{ user().totalBookings }}</dd>
+            </div>
+            <div class="flex justify-between">
+              <dt class="text-sm font-medium text-gray-500">Total Spent</dt>
+              <dd class="text-sm text-gray-900 font-semibold">€{{ user().totalSpent }}</dd>
+            </div>
+            <div class="flex justify-between">
+              <dt class="text-sm font-medium text-gray-500">Join Date</dt>
+              <dd class="text-sm text-gray-900">{{ user().joinDate }}</dd>
+            </div>
+            <div class="flex justify-between">
+              <dt class="text-sm font-medium text-gray-500">Last Login</dt>
+              <dd class="text-sm text-gray-900">{{ user().lastLogin }}</dd>
+            </div>
+          </dl>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bookings Tab -->
+    <div *ngSwitchCase="'bookings'" class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+      <div class="px-4 py-5 sm:px-6 flex justify-between items-center">
+        <h3 class="text-lg font-medium leading-6 text-gray-900">Booking History</h3>
+      </div>
+      <div class="overflow-x-auto border-t border-gray-200">
+        <table class="min-w-full divide-y divide-gray-200">
+          <thead class="bg-gray-50">
+            <tr>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Provider</th>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Service</th>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Amount</th>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+            </tr>
+          </thead>
+          <tbody class="bg-white divide-y divide-gray-200">
+            <tr *ngFor="let booking of bookings()">
+              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-indigo-600">{{ booking.id }}</td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ booking.providerName }}</td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ booking.service }}</td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ booking.date }}</td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">€{{ booking.amount }}</td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                <app-status-badge [status]="booking.status"></app-status-badge>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Activity Tab -->
+    <div *ngSwitchCase="'activity'" class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+      <h3 class="text-lg font-medium leading-6 text-gray-900 mb-6">Activity Log</h3>
+      <div class="flow-root">
+        <ul role="list" class="-mb-8">
+          <li *ngFor="let activity of activityLog(); let last = last">
+            <div class="relative pb-8">
+              <span *ngIf="!last" class="absolute top-4 left-4 -ml-px h-full w-0.5 bg-gray-200" aria-hidden="true"></span>
+              <div class="relative flex space-x-3">
+                <div>
+                  <span class="h-8 w-8 rounded-full bg-gray-100 flex items-center justify-center ring-8 ring-white text-gray-500">
+                    <svg class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd" />
+                    </svg>
+                  </span>
+                </div>
+                <div class="flex min-w-0 flex-1 justify-between space-x-4 pt-1.5">
+                  <div>
+                    <p class="text-sm text-gray-900 font-medium">{{ activity.action }}</p>
+                    <p class="text-sm text-gray-500">{{ activity.details }}</p>
+                  </div>
+                  <div class="whitespace-nowrap text-right text-sm text-gray-500">
+                    <time>{{ activity.date }}</time>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Admin Notes -->
+  <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+    <h3 class="text-lg font-medium leading-6 text-gray-900 mb-4">Admin Notes</h3>
+    <div>
+      <textarea [(ngModel)]="adminNotes" rows="4" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm p-3 border" placeholder="Add notes about this user..."></textarea>
+    </div>
+    <div class="mt-3 flex justify-end">
+      <button (click)="saveNotes()" type="button" class="inline-flex items-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+        Save Notes
+      </button>
+    </div>
+  </div>
+</div>\n

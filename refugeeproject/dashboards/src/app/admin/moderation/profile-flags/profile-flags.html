@@ -1,0 +1,46 @@
+<div class="space-y-6">
+  <app-breadcrumb [items]="[{label: 'Dashboard', route: '/admin'}, {label: 'Moderation', route: '/admin/moderation'}, {label: 'Profile Flags'}]"></app-breadcrumb>
+
+  <div class="flex items-center justify-between">
+    <h1 class="text-2xl font-bold text-gray-900">Flagged Profiles</h1>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+    <div *ngFor="let profile of profiles()" class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden flex flex-col">
+      <div class="p-6 flex-grow">
+        <div class="flex justify-between items-start mb-4">
+          <div>
+            <h3 class="text-lg font-bold text-gray-900">{{ profile.providerName }}</h3>
+            <span class="text-sm text-indigo-600 font-medium">{{ profile.category }}</span>
+          </div>
+          <app-status-badge [status]="profile.status === 'open' ? 'pending' : (profile.status === 'under_review' ? 'warning' : 'default')" [status]="profile.status"></app-status-badge>
+        </div>
+
+        <div class="mb-4">
+          <span class="inline-flex items-center px-2.5 py-0.5 rounded-md text-xs font-medium bg-rose-100 text-rose-800 mb-2">
+            Reason: {{ profile.flagReason }}
+          </span>
+          <div class="bg-gray-50 border-l-4 border-rose-500 p-3 rounded-r-md">
+            <p class="text-sm text-gray-700 italic">"{{ profile.flaggedContent }}"</p>
+          </div>
+        </div>
+
+        <div class="text-xs text-gray-500">
+          Flagged {{ profile.flaggedAt | timeAgo }}
+        </div>
+      </div>
+      
+      <div class="bg-gray-50 px-6 py-4 border-t border-gray-100 flex justify-end space-x-3">
+        <button (click)="approveProfile(profile.providerId)" class="px-4 py-2 bg-white text-gray-700 border border-gray-300 hover:bg-gray-50 rounded-lg text-sm font-medium transition-colors shadow-sm">
+          Approve
+        </button>
+        <button class="px-4 py-2 bg-indigo-50 text-indigo-700 hover:bg-indigo-100 rounded-lg text-sm font-medium transition-colors">
+          Edit Profile
+        </button>
+        <button (click)="removeProfile(profile.providerId)" class="px-4 py-2 bg-rose-600 text-white hover:bg-rose-700 rounded-lg text-sm font-medium transition-colors shadow-sm">
+          Remove
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

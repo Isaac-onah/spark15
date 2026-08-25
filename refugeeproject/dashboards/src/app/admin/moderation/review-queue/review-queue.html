@@ -1,0 +1,97 @@
+<div class="space-y-6">
+  <app-breadcrumb [items]="[{label: 'Dashboard', route: '/admin'}, {label: 'Moderation', route: '/admin/moderation'}, {label: 'Reviews'}]"></app-breadcrumb>
+
+  <!-- Stats Row -->
+  <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+    <app-stat-card title="Total Reviews" [value]="stats().totalReviews" icon="chat-alt"></app-stat-card>
+    <app-stat-card title="Flagged" [value]="stats().flaggedReviews" icon="flag" valueColor="text-rose-600"></app-stat-card>
+    <app-stat-card title="Under Review" [value]="stats().underReview" icon="clock" valueColor="text-amber-600"></app-stat-card>
+    <app-stat-card title="Removed" [value]="stats().removed" icon="trash" valueColor="text-gray-500"></app-stat-card>
+  </div>
+
+  <!-- Filters -->
+  <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+    <div class="flex space-x-2 bg-gray-100 p-1 rounded-lg">
+      <button 
+        (click)="statusFilter.set('all')" 
+        [class]="statusFilter() === 'all' ? 'bg-white shadow-sm' : ''"
+        class="px-4 py-2 text-sm font-medium rounded-md text-gray-700">
+        All
+      </button>
+      <button 
+        (click)="statusFilter.set('flagged')"
+        [class]="statusFilter() === 'flagged' ? 'bg-white shadow-sm' : ''"
+        class="px-4 py-2 text-sm font-medium rounded-md text-rose-600">
+        Flagged
+      </button>
+      <button 
+        (click)="statusFilter.set('published')"
+        [class]="statusFilter() === 'published' ? 'bg-white shadow-sm' : ''"
+        class="px-4 py-2 text-sm font-medium rounded-md text-gray-700">
+        Published
+      </button>
+      <button 
+        (click)="statusFilter.set('under_review')"
+        [class]="statusFilter() === 'under_review' ? 'bg-white shadow-sm' : ''"
+        class="px-4 py-2 text-sm font-medium rounded-md text-amber-600">
+        Under Review
+      </button>
+      <button 
+        (click)="statusFilter.set('removed')"
+        [class]="statusFilter() === 'removed' ? 'bg-white shadow-sm' : ''"
+        class="px-4 py-2 text-sm font-medium rounded-md text-gray-700">
+        Removed
+      </button>
+    </div>
+    
+    <div class="w-full sm:w-64">
+      <input type="text" [(ngModel)]="searchQuery" placeholder="Search reviews..." class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500">
+    </div>
+  </div>
+
+  <!-- Review Cards Grid -->
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <div *ngFor="let review of filteredReviews()" class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 flex flex-col">
+      <div class="flex justify-between items-start mb-4">
+        <div>
+          <h3 class="text-sm font-semibold text-gray-900">{{ review.reviewerName }}</h3>
+          <div class="flex items-center mt-1">
+            <div class="flex text-amber-400">
+              <span *ngFor="let i of [1,2,3,4,5]">
+                <svg class="w-4 h-4" [class.text-gray-300]="i > review.rating" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+              </span>
+            </div>
+            <span class="ml-2 text-xs text-gray-500">{{ review.date | timeAgo }}</span>
+          </div>
+        </div>
+        <app-status-badge [status]="review.status === 'published' ? 'active' : (review.status === 'flagged' ? 'error' : (review.status === 'under_review' ? 'pending' : 'default'))" [status]="review.status"></app-status-badge>
+      </div>
+
+      <div class="flex-grow mb-4">
+        <p class="text-gray-700 text-sm">{{ review.text | truncate: 150 }}</p>
+        <button *ngIf="review.text.length > 150" class="text-indigo-600 text-xs mt-1 hover:underline">Show more</button>
+      </div>
+
+      <div class="flex items-center justify-between border-t border-gray-50 pt-4 mt-auto">
+        <div class="text-xs text-gray-500 flex flex-col gap-1">
+          <span>Provider: <span class="font-medium text-gray-900">{{ review.providerName }}</span></span>
+          <span *ngIf="review.flagReason" class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-medium bg-rose-100 text-rose-800 w-max">
+            Flag: {{ review.flagReason }}
+          </span>
+        </div>
+        
+        <div class="flex space-x-2">
+          <button *ngIf="review.status === 'flagged' || review.status === 'under_review'" (click)="approveReview(review.id)" class="px-3 py-1.5 bg-emerald-50 text-emerald-600 hover:bg-emerald-100 rounded-md text-xs font-medium transition-colors">
+            Approve
+          </button>
+          <button *ngIf="review.status !== 'removed'" (click)="removeReview(review.id)" class="px-3 py-1.5 bg-rose-50 text-rose-600 hover:bg-rose-100 rounded-md text-xs font-medium transition-colors">
+            Remove
+          </button>
+          <button (click)="viewReviewDetail(review)" class="px-3 py-1.5 bg-gray-50 text-gray-700 hover:bg-gray-100 border border-gray-200 rounded-md text-xs font-medium transition-colors">
+            View
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

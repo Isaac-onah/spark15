@@ -1,0 +1,92 @@
+<div class="space-y-6">
+  <app-breadcrumb [items]="breadcrumbs"></app-breadcrumb>
+
+  <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+    <h1 class="text-2xl font-bold text-gray-900">Booking Calendar</h1>
+    
+    <div class="flex items-center bg-white rounded-lg shadow-sm border border-gray-200">
+      <button (click)="prevMonth()" class="p-2 text-gray-600 hover:bg-gray-50 rounded-l-lg border-r border-gray-200">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+      </button>
+      <div class="px-4 py-2 font-medium text-gray-900 min-w-[150px] text-center">
+        {{ monthName() }}
+      </div>
+      <button (click)="nextMonth()" class="p-2 text-gray-600 hover:bg-gray-50 rounded-r-lg border-l border-gray-200">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+      </button>
+    </div>
+  </div>
+
+  <div class="flex gap-6">
+    <!-- Calendar Grid -->
+    <div class="flex-1 bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+      <!-- Days of week header -->
+      <div class="grid grid-cols-7 border-b border-gray-200 bg-gray-50">
+        <div *ngFor="let day of ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']" class="py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+          {{ day }}
+        </div>
+      </div>
+      
+      <!-- Calendar cells -->
+      <div class="divide-y divide-gray-200">
+        <div *ngFor="let week of calendarGrid()" class="grid grid-cols-7 divide-x divide-gray-200 h-28">
+          <div *ngFor="let day of week" 
+               (click)="selectDate(day)"
+               class="p-2 hover:bg-gray-50 cursor-pointer relative transition-colors"
+               [class.bg-indigo-50]="isSameDay(selectedDate() || today, day)">
+            
+            <span class="text-sm font-medium" 
+                  [class.text-gray-900]="day.getMonth() === currentMonth()"
+                  [class.text-gray-400]="day.getMonth() !== currentMonth()"
+                  [class.bg-indigo-600]="isSameDay(day, today)"
+                  [class.text-white]="isSameDay(day, today)"
+                  [class.rounded-full]="isSameDay(day, today)"
+                  [class.w-7]="isSameDay(day, today)"
+                  [class.h-7]="isSameDay(day, today)"
+                  [class.flex]="isSameDay(day, today)"
+                  [class.items-center]="isSameDay(day, today)"
+                  [class.justify-center]="isSameDay(day, today)">
+              {{ day.getDate() }}
+            </span>
+
+            <div class="mt-2 space-y-1">
+              <div *ngFor="let b of getBookingsForDate(day) | slice:0:3" 
+                   [class]="getStatusColor(b.status)" 
+                   class="w-full h-1.5 rounded-full" 
+                   [title]="b.title + ' (' + b.status + ')'">
+              </div>
+              <div *ngIf="getBookingsForDate(day).length > 3" class="text-[10px] text-gray-500 font-medium">
+                +{{ getBookingsForDate(day).length - 3 }} more
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Side Panel for Selected Date -->
+    <div class="w-80 hidden lg:block bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+      <h3 class="text-lg font-bold text-gray-900 mb-4">
+        {{ selectedDate() ? (selectedDate() | date:'longDate') : 'Select a date' }}
+      </h3>
+      
+      <div *ngIf="selectedDate() && getBookingsForDate(selectedDate()!).length > 0; else noBookings">
+        <div class="space-y-4">
+          <div *ngFor="let b of getBookingsForDate(selectedDate()!)" class="p-3 rounded-lg border border-gray-100 bg-gray-50 hover:border-indigo-200 transition-colors cursor-pointer">
+            <div class="flex items-center gap-2 mb-1">
+              <div [class]="getStatusColor(b.status)" class="w-2 h-2 rounded-full"></div>
+              <span class="text-sm font-medium text-gray-900">{{ b.id }}</span>
+            </div>
+            <p class="text-sm text-gray-600">{{ b.title }}</p>
+            <p class="text-xs text-gray-400 mt-1 capitalize">{{ b.status }}</p>
+          </div>
+        </div>
+      </div>
+      <ng-template #noBookings>
+        <div class="text-center py-8">
+          <p class="text-gray-500 text-sm">No bookings on this date.</p>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,88 @@
+<div class="space-y-6">
+  <app-breadcrumb [items]="breadcrumbs"></app-breadcrumb>
+
+  <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+    <h1 class="text-2xl font-bold text-gray-900">Provider Payouts</h1>
+    <div class="flex gap-4 items-center bg-white px-4 py-2 rounded-lg shadow-sm border border-gray-100">
+      <div class="text-sm text-gray-500">Pending Total:</div>
+      <div class="text-lg font-bold text-indigo-600">{{ totalPendingAmount() | currencyEur }}</div>
+    </div>
+  </div>
+
+  <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden mb-6">
+    <div class="p-4 border-b border-gray-100 bg-gray-50 flex justify-between items-center">
+      <h2 class="text-lg font-medium text-gray-900">Pending Payouts ({{ pendingPayouts().length }})</h2>
+      <button [disabled]="!hasSelected()" 
+              (click)="releaseSelected()"
+              [class]="hasSelected() ? 'bg-indigo-600 hover:bg-indigo-700 text-white' : 'bg-gray-200 text-gray-400 cursor-not-allowed'"
+              class="px-4 py-2 text-sm font-medium rounded-lg transition-colors">
+        Release Selected
+      </button>
+    </div>
+    
+    <div class="overflow-x-auto">
+      <table class="min-w-full divide-y divide-gray-200">
+        <thead class="bg-white">
+          <tr>
+            <th class="px-6 py-3 text-left">
+              <input type="checkbox" (change)="toggleAll($event)" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded">
+            </th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Provider</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Booking Ref</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Amount</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Date Ready</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Status</th>
+          </tr>
+        </thead>
+        <tbody class="bg-white divide-y divide-gray-200">
+          <tr *ngFor="let p of pendingPayouts()" [class.bg-indigo-50]="p.selected">
+            <td class="px-6 py-4 whitespace-nowrap">
+              <input type="checkbox" [(ngModel)]="p.selected" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded">
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ p.providerName }}</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ p.bookingRef }}</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-900">{{ p.amount | currencyEur }}</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ p.date | date:'shortDate' }}</td>
+            <td class="px-6 py-4 whitespace-nowrap">
+              <app-status-badge [status]="p.status"></app-status-badge>
+            </td>
+          </tr>
+          <tr *ngIf="pendingPayouts().length === 0">
+            <td colspan="6" class="px-6 py-8 text-center text-sm text-gray-500">No pending payouts at this time.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <h2 class="text-lg font-medium text-gray-900 mt-8 mb-4">Payout History</h2>
+  
+  <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+    <div class="overflow-x-auto">
+      <table class="min-w-full divide-y divide-gray-200">
+        <thead class="bg-gray-50">
+          <tr>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Payout ID</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Provider</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Booking Ref</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Amount</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Date Released</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Status</th>
+          </tr>
+        </thead>
+        <tbody class="bg-white divide-y divide-gray-200">
+          <tr *ngFor="let p of completedPayouts()">
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ p.id }}</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ p.providerName }}</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ p.bookingRef }}</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-900">{{ p.amount | currencyEur }}</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ p.date | date:'short' }}</td>
+            <td class="px-6 py-4 whitespace-nowrap">
+              <app-status-badge [status]="p.status"></app-status-badge>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

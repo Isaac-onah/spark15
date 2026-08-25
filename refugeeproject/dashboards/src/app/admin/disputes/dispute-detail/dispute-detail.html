@@ -1,0 +1,177 @@
+<div class="space-y-6">
+  <app-breadcrumb [items]="[{label: 'Dashboard', route: '/admin'}, {label: 'Disputes', route: '/admin/disputes'}, {label: disputeId()}]"></app-breadcrumb>
+
+  <!-- Header -->
+  <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+    <div>
+      <h1 class="text-2xl font-bold text-gray-900 flex items-center gap-3">
+        {{ disputeId() }}
+        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
+          {{ dispute().category }}
+        </span>
+      </h1>
+      <div class="mt-2 text-sm text-gray-500 flex items-center gap-4">
+        <span>Opened {{ dispute().createdDate | timeAgo }}</span>
+        <span>Assigned to: <span class="font-medium text-gray-900">{{ dispute().assignedTo || 'Unassigned' }}</span></span>
+      </div>
+    </div>
+    <div class="flex items-center gap-3">
+      <span class="inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium uppercase tracking-wide bg-orange-100 text-orange-800">
+        {{ dispute().priority }} Priority
+      </span>
+      <app-status-badge status="warning" [status]="dispute().status"></app-status-badge>
+      <div class="flex items-center text-rose-600 bg-rose-50 px-3 py-1 rounded-md text-sm font-medium ml-2">
+        <svg class="w-4 h-4 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        SLA: {{ dispute().slaTimerHours }}h
+      </div>
+    </div>
+  </div>
+
+  <!-- Two Column Layout -->
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+    <!-- Left Column (2/3) -->
+    <div class="lg:col-span-2 space-y-6">
+      <!-- Client Statement -->
+      <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+        <h2 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
+          <svg class="w-5 h-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+          </svg>
+          Client's Statement
+          <span class="text-sm font-normal text-gray-500 ml-auto">{{ dispute().client.name }}</span>
+        </h2>
+        <div class="bg-gray-50 p-4 rounded-lg text-gray-700 text-sm">
+          {{ dispute().client.statement }}
+        </div>
+        <div class="mt-4 flex gap-2">
+          <!-- Mock evidence thumbnails -->
+          <div class="w-20 h-20 bg-gray-200 rounded-lg border border-gray-300 flex items-center justify-center text-xs text-gray-500">Photo 1</div>
+          <div class="w-20 h-20 bg-gray-200 rounded-lg border border-gray-300 flex items-center justify-center text-xs text-gray-500">Photo 2</div>
+        </div>
+      </div>
+
+      <!-- Provider Response -->
+      <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+        <h2 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
+          <svg class="w-5 h-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+          </svg>
+          Provider's Response
+          <span class="text-sm font-normal text-gray-500 ml-auto">{{ dispute().provider.name }}</span>
+        </h2>
+        <div class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded-r-lg text-gray-700 text-sm">
+          {{ dispute().provider.statement }}
+        </div>
+      </div>
+
+      <!-- Related Booking -->
+      <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+        <h2 class="text-lg font-bold text-gray-900 mb-4">Related Booking</h2>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div>
+            <span class="block text-xs font-medium text-gray-500">Booking ID</span>
+            <span class="text-sm font-semibold text-indigo-600">{{ dispute().booking.id }}</span>
+          </div>
+          <div>
+            <span class="block text-xs font-medium text-gray-500">Service</span>
+            <span class="text-sm text-gray-900">{{ dispute().booking.service }}</span>
+          </div>
+          <div>
+            <span class="block text-xs font-medium text-gray-500">Price</span>
+            <span class="text-sm font-semibold text-gray-900">{{ dispute().booking.price | currencyEur }}</span>
+          </div>
+          <div>
+            <span class="block text-xs font-medium text-gray-500">Escrow Status</span>
+            <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-amber-100 text-amber-800 capitalize">
+              {{ dispute().booking.escrowStatus }}
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Internal Discussion -->
+      <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+        <h2 class="text-lg font-bold text-gray-900 mb-4">Internal Discussion</h2>
+        <div class="space-y-4 mb-4">
+          <div *ngFor="let note of dispute().internalNotes" class="bg-amber-50 p-4 rounded-lg border border-amber-100">
+            <div class="flex justify-between items-center mb-2">
+              <span class="text-sm font-bold text-gray-900">{{ note.author }}</span>
+              <span class="text-xs text-gray-500">{{ note.date | timeAgo }}</span>
+            </div>
+            <p class="text-sm text-gray-700">{{ note.text }}</p>
+          </div>
+        </div>
+        <div class="mt-4 flex flex-col items-end gap-2">
+          <textarea [(ngModel)]="internalNote" rows="3" class="w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block sm:text-sm border-gray-300 rounded-md p-3 border" placeholder="Add an internal note..."></textarea>
+          <button (click)="addInternalNote()" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-gray-800 hover:bg-gray-900">
+            Add Note
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Column (1/3) -->
+    <div class="lg:col-span-1 space-y-6">
+      <!-- Resolution Actions -->
+      <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+        <h2 class="text-lg font-bold text-gray-900 mb-4">Resolution Actions</h2>
+        <div class="space-y-3">
+          <button (click)="resolveAction('refund_full')" class="w-full flex justify-center py-2.5 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-emerald-600 hover:bg-emerald-700">
+            Full Refund to Client
+          </button>
+          <button (click)="resolveAction('refund_partial')" class="w-full flex justify-center py-2.5 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-amber-500 hover:bg-amber-600">
+            Partial Refund (50%)
+          </button>
+          <button (click)="resolveAction('release')" class="w-full flex justify-center py-2.5 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700">
+            Release Funds to Provider
+          </button>
+          
+          <div class="border-t border-gray-200 my-4 pt-4"></div>
+          
+          <button (click)="resolveAction('warn')" class="w-full flex justify-center py-2 px-4 border border-orange-200 rounded-lg shadow-sm text-sm font-medium text-orange-700 bg-orange-50 hover:bg-orange-100">
+            Issue Warning to Provider
+          </button>
+          <button (click)="resolveAction('suspend')" class="w-full flex justify-center py-2 px-4 border border-rose-200 rounded-lg shadow-sm text-sm font-medium text-rose-700 bg-rose-50 hover:bg-rose-100">
+            Suspend Account
+          </button>
+          <button (click)="resolveAction('escalate')" class="w-full flex justify-center py-2 px-4 border border-purple-200 rounded-lg shadow-sm text-sm font-medium text-purple-700 bg-purple-50 hover:bg-purple-100 mt-3">
+            Escalate to Super Admin
+          </button>
+        </div>
+      </div>
+
+      <!-- Dispute Timeline -->
+      <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+        <h2 class="text-lg font-bold text-gray-900 mb-4">Timeline</h2>
+        <div class="flow-root">
+          <ul role="list" class="-mb-8">
+            <li *ngFor="let event of dispute().timeline; let last = last">
+              <div class="relative pb-8">
+                <span *ngIf="!last" class="absolute top-4 left-4 -ml-px h-full w-0.5 bg-gray-200" aria-hidden="true"></span>
+                <div class="relative flex space-x-3">
+                  <div>
+                    <span class="h-8 w-8 rounded-full flex items-center justify-center ring-8 ring-white" [ngClass]="event.type === 'created' ? 'bg-rose-500' : (event.type === 'status_change' ? 'bg-amber-500' : 'bg-blue-500')">
+                      <svg class="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                    </span>
+                  </div>
+                  <div class="min-w-0 flex-1 pt-1.5 flex justify-between space-x-4">
+                    <div>
+                      <p class="text-sm text-gray-500">{{ event.text }}</p>
+                    </div>
+                    <div class="text-right text-xs whitespace-nowrap text-gray-500">
+                      {{ event.date | timeAgo }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

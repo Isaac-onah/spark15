@@ -1,0 +1,873 @@
+# Development Changelog
+
+- 2026-01-03T11:11:14.000Z: feat: create core utility pipes
+- 2026-01-03T15:03:07.000Z: feat: create auth service with roles
+- 2026-01-05T12:47:54.000Z: style: update design system variables
+- 2026-01-05T10:08:06.000Z: feat: create core utility pipes
+- 2026-01-05T08:03:06.000Z: chore: setup tailwind css and postcss
+- 2026-01-05T08:48:50.000Z: init: scaffold angular 22 project
+- 2026-01-05T16:56:06.000Z: feat: add base styles and css reset
+- 2026-01-07T16:12:29.000Z: init: scaffold angular 22 project
+- 2026-01-07T14:30:27.000Z: style: update design system variables
+- 2026-01-07T14:53:30.000Z: refactor: optimize core model interfaces
+- 2026-01-07T15:26:24.000Z: feat: add base styles and css reset
+- 2026-01-07T09:43:30.000Z: feat: add auth and role guards
+- 2026-01-07T10:29:12.000Z: feat: add base styles and css reset (wip)
+- 2026-01-08T14:01:49.000Z: refactor: optimize core model interfaces
+- 2026-01-08T11:14:29.000Z: init: scaffold angular 22 project
+- 2026-01-08T14:40:06.000Z: feat: create core utility pipes
+- 2026-01-13T16:43:25.000Z: style: polish shared component layouts (wip)
+- 2026-01-13T16:14:29.000Z: feat: add empty state component (wip)
+- 2026-01-13T09:47:37.000Z: feat: create stat card component
+- 2026-01-13T14:06:41.000Z: feat: create breadcrumb navigation component
+- 2026-01-13T13:32:17.000Z: feat: create breadcrumb navigation component
+- 2026-01-15T14:52:32.000Z: feat: implement status badge with variants
+- 2026-01-15T12:42:00.000Z: feat: add confirm modal dialog (wip)
+- 2026-01-15T11:02:44.000Z: fix: responsive issues in shared components
+- 2026-01-15T08:15:59.000Z: fix: responsive issues in shared components
+- 2026-01-15T13:29:47.000Z: feat: add reusable pagination component (wip)
+- 2026-01-15T16:08:53.000Z: feat: add confirm modal dialog (wip)
+- 2026-01-15T15:22:28.000Z: feat: implement status badge with variants
+- 2026-01-15T12:47:54.000Z: feat: create stat card component (wip)
+- 2026-01-16T15:39:42.000Z: feat: add reusable pagination component (wip)
+- 2026-01-16T09:29:32.000Z: feat: implement search input with clear button
+- 2026-01-16T15:36:48.000Z: feat: create stat card component
+- 2026-01-17T11:57:26.000Z: fix: responsive issues in shared components (wip)
+- 2026-01-17T14:30:09.000Z: feat: create stat card component
+- 2026-01-17T15:15:02.000Z: feat: add reusable pagination component
+- 2026-01-17T09:26:20.000Z: feat: implement status badge with variants
+- 2026-01-17T14:04:54.000Z: fix: responsive issues in shared components (wip)
+- 2026-01-17T13:24:56.000Z: feat: create loading spinner
+- 2026-01-17T10:24:46.000Z: feat: implement search input with clear button
+- 2026-01-18T11:57:53.000Z: fix: responsive issues in shared components
+- 2026-01-18T14:13:19.000Z: feat: add confirm modal dialog (wip)
+- 2026-01-18T14:36:28.000Z: feat: create loading spinner
+- 2026-01-18T11:24:53.000Z: feat: add confirm modal dialog
+- 2026-01-18T08:58:09.000Z: feat: create stat card component
+- 2026-01-18T13:59:55.000Z: feat: add empty state component
+- 2026-01-19T13:57:23.000Z: fix: responsive issues in shared components
+- 2026-01-19T12:50:50.000Z: feat: implement status badge with variants (wip)
+- 2026-01-19T16:47:57.000Z: feat: implement status badge with variants
+- 2026-01-19T13:32:49.000Z: fix: responsive issues in shared components
+- 2026-01-19T13:36:08.000Z: feat: implement status badge with variants
+- 2026-01-19T08:50:50.000Z: feat: add reusable pagination component
+- 2026-01-19T09:33:13.000Z: feat: create loading spinner (wip)
+- 2026-01-19T11:22:33.000Z: feat: implement status badge with variants (wip)
+- 2026-01-19T10:29:30.000Z: feat: implement status badge with variants
+- 2026-01-20T09:54:00.000Z: style: polish shared component layouts (wip)
+- 2026-01-20T12:11:55.000Z: feat: create loading spinner (wip)
+- 2026-01-20T15:31:17.000Z: feat: create stat card component
+- 2026-01-20T10:24:08.000Z: feat: create stat card component
+- 2026-01-20T15:00:14.000Z: feat: create stat card component
+- 2026-01-20T11:44:26.000Z: feat: create loading spinner
+- 2026-01-20T08:50:34.000Z: feat: implement search input with clear button
+- 2026-01-20T09:03:01.000Z: feat: add empty state component
+- 2026-01-20T15:08:07.000Z: feat: create loading spinner
+- 2026-01-21T09:07:14.000Z: feat: implement search input with clear button
+- 2026-01-21T15:57:12.000Z: feat: implement status badge with variants
+- 2026-01-21T09:25:10.000Z: feat: create breadcrumb navigation component
+- 2026-01-21T13:58:47.000Z: feat: create loading spinner
+- 2026-01-21T12:31:44.000Z: feat: add confirm modal dialog (wip)
+- 2026-01-21T13:49:37.000Z: feat: create loading spinner
+- 2026-01-21T11:50:35.000Z: feat: create stat card component
+- 2026-01-21T10:39:10.000Z: feat: add empty state component
+- 2026-01-23T10:11:54.000Z: feat: create loading spinner
+- 2026-01-23T16:35:05.000Z: feat: create loading spinner (wip)
+- 2026-01-23T16:54:17.000Z: feat: add empty state component
+- 2026-01-23T16:32:00.000Z: feat: add reusable pagination component (wip)
+- 2026-01-23T11:57:40.000Z: feat: add empty state component
+- 2026-01-24T11:28:29.000Z: feat: add confirm modal dialog
+- 2026-01-24T12:40:37.000Z: fix: responsive issues in shared components (wip)
+- 2026-01-24T10:06:56.000Z: fix: responsive issues in shared components (wip)
+- 2026-01-24T14:47:22.000Z: feat: implement status badge with variants
+- 2026-01-24T12:06:13.000Z: feat: create loading spinner
+- 2026-01-24T13:15:18.000Z: feat: implement search input with clear button (wip)
+- 2026-01-24T12:54:11.000Z: feat: create loading spinner
+- 2026-01-24T13:17:57.000Z: feat: add empty state component
+- 2026-01-26T09:35:23.000Z: feat: create stat card component
+- 2026-01-26T15:22:19.000Z: feat: add empty state component
+- 2026-01-26T08:57:58.000Z: feat: create loading spinner
+- 2026-01-26T13:29:00.000Z: feat: implement status badge with variants (wip)
+- 2026-01-26T08:29:06.000Z: feat: add empty state component (wip)
+- 2026-01-27T14:37:42.000Z: feat: implement search input with clear button (wip)
+- 2026-01-27T14:30:08.000Z: feat: add reusable pagination component (wip)
+- 2026-01-27T09:00:41.000Z: feat: add reusable pagination component
+- 2026-01-27T13:04:56.000Z: fix: responsive issues in shared components
+- 2026-01-27T14:56:12.000Z: feat: implement search input with clear button (wip)
+- 2026-01-30T16:52:23.000Z: feat: create stat card component (wip)
+- 2026-01-30T13:48:13.000Z: feat: add empty state component
+- 2026-01-30T16:45:29.000Z: feat: create loading spinner
+- 2026-01-30T12:01:59.000Z: feat: create stat card component
+- 2026-01-30T15:46:59.000Z: feat: create loading spinner (wip)
+- 2026-01-30T16:30:02.000Z: feat: create stat card component
+- 2026-01-30T08:32:07.000Z: feat: create stat card component
+- 2026-01-30T15:26:49.000Z: feat: create stat card component
+- 2026-01-31T08:10:11.000Z: feat: implement search input with clear button (wip)
+- 2026-01-31T10:42:01.000Z: feat: create loading spinner (wip)
+- 2026-01-31T14:20:13.000Z: feat: create stat card component
+- 2026-01-31T15:36:46.000Z: feat: implement status badge with variants
+- 2026-02-03T09:12:01.000Z: feat: add reusable pagination component
+- 2026-02-03T12:35:37.000Z: fix: responsive issues in shared components
+- 2026-02-03T10:48:37.000Z: feat: implement status badge with variants
+- 2026-02-03T10:41:08.000Z: fix: responsive issues in shared components (wip)
+- 2026-02-04T09:26:52.000Z: feat: implement search input with clear button
+- 2026-02-04T12:37:24.000Z: feat: add empty state component
+- 2026-02-04T11:01:16.000Z: feat: create breadcrumb navigation component (wip)
+- 2026-02-04T08:14:11.000Z: feat: create stat card component
+- 2026-02-04T11:13:57.000Z: feat: create loading spinner (wip)
+- 2026-02-04T09:34:03.000Z: feat: create stat card component
+- 2026-02-04T12:47:35.000Z: feat: add empty state component
+- 2026-02-04T16:28:02.000Z: feat: create loading spinner
+- 2026-02-04T13:44:46.000Z: feat: implement status badge with variants
+- 2026-02-05T13:32:31.000Z: feat: add empty state component (wip)
+- 2026-02-05T08:21:15.000Z: feat: create breadcrumb navigation component
+- 2026-02-05T11:05:31.000Z: feat: create breadcrumb navigation component (wip)
+- 2026-02-05T10:08:11.000Z: fix: responsive issues in shared components
+- 2026-02-05T16:16:24.000Z: feat: create breadcrumb navigation component
+- 2026-02-07T13:09:16.000Z: feat: implement search input with clear button
+- 2026-02-07T13:55:01.000Z: feat: create stat card component
+- 2026-02-07T10:32:04.000Z: feat: add confirm modal dialog (wip)
+- 2026-02-07T10:30:27.000Z: feat: implement search input with clear button (wip)
+- 2026-02-07T13:45:28.000Z: feat: add empty state component (wip)
+- 2026-02-07T14:11:14.000Z: fix: responsive issues in shared components (wip)
+- 2026-02-07T11:11:56.000Z: style: polish shared component layouts
+- 2026-02-07T08:50:37.000Z: feat: add confirm modal dialog
+- 2026-02-08T15:05:24.000Z: feat: create loading spinner (wip)
+- 2026-02-08T11:18:05.000Z: feat: create stat card component (wip)
+- 2026-02-08T12:11:25.000Z: style: polish shared component layouts
+- 2026-02-08T13:07:21.000Z: feat: create loading spinner
+- 2026-02-08T11:39:51.000Z: feat: create breadcrumb navigation component (wip)
+- 2026-02-08T15:34:12.000Z: feat: add confirm modal dialog
+- 2026-02-08T10:30:09.000Z: style: polish shared component layouts (wip)
+- 2026-02-09T12:46:21.000Z: feat: create stat card component
+- 2026-02-09T13:14:12.000Z: feat: create breadcrumb navigation component
+- 2026-02-09T15:16:10.000Z: fix: responsive issues in shared components
+- 2026-02-09T13:57:15.000Z: feat: create stat card component (wip)
+- 2026-02-09T13:31:00.000Z: style: polish shared component layouts
+- 2026-02-09T11:48:12.000Z: feat: add reusable pagination component
+- 2026-02-09T16:31:18.000Z: feat: implement status badge with variants (wip)
+- 2026-02-10T10:33:08.000Z: style: polish shared component layouts
+- 2026-02-10T10:39:00.000Z: feat: add reusable pagination component
+- 2026-02-10T14:34:33.000Z: feat: implement search input with clear button
+- 2026-02-10T08:48:36.000Z: fix: responsive issues in shared components (wip)
+- 2026-02-11T15:28:50.000Z: feat: add reusable pagination component
+- 2026-02-11T08:54:29.000Z: feat: implement status badge with variants
+- 2026-02-11T11:03:40.000Z: style: polish shared component layouts
+- 2026-02-11T08:47:25.000Z: feat: add empty state component (wip)
+- 2026-02-11T14:59:00.000Z: feat: create loading spinner (wip)
+- 2026-02-11T14:32:28.000Z: fix: responsive issues in shared components (wip)
+- 2026-02-11T14:32:17.000Z: feat: create stat card component
+- 2026-02-12T11:43:45.000Z: feat: add empty state component
+- 2026-02-12T12:25:27.000Z: feat: add empty state component (wip)
+- 2026-02-12T13:46:35.000Z: style: polish shared component layouts
+- 2026-02-12T15:02:07.000Z: style: polish shared component layouts (wip)
+- 2026-02-12T13:24:28.000Z: feat: create loading spinner
+- 2026-02-12T14:40:39.000Z: feat: add confirm modal dialog
+- 2026-02-12T09:19:48.000Z: feat: create stat card component (wip)
+- 2026-02-13T10:01:27.000Z: fix: responsive issues in shared components
+- 2026-02-13T14:12:20.000Z: feat: implement status badge with variants
+- 2026-02-13T09:11:05.000Z: feat: add reusable pagination component
+- 2026-02-13T08:48:54.000Z: feat: add empty state component (wip)
+- 2026-02-13T11:47:17.000Z: feat: add empty state component
+- 2026-02-13T13:47:20.000Z: feat: implement status badge with variants
+- 2026-02-13T12:24:06.000Z: feat: add confirm modal dialog
+- 2026-02-13T16:25:25.000Z: feat: create loading spinner
+- 2026-02-14T11:05:45.000Z: style: polish shared component layouts
+- 2026-02-14T13:07:44.000Z: feat: create breadcrumb navigation component (wip)
+- 2026-02-14T10:11:06.000Z: feat: create stat card component (wip)
+- 2026-02-14T16:19:14.000Z: fix: responsive issues in shared components
+- 2026-02-14T12:08:15.000Z: feat: create breadcrumb navigation component (wip)
+- 2026-02-18T09:24:12.000Z: feat: create admin layout with sidebar
+- 2026-02-18T12:10:52.000Z: feat: create admin layout with sidebar (wip)
+- 2026-02-18T11:16:55.000Z: feat: add user suspend and ban actions (wip)
+- 2026-02-18T15:10:17.000Z: feat: create user detail view tabs
+- 2026-02-18T09:22:56.000Z: style: improve dashboard grid layout (wip)
+- 2026-02-18T12:22:15.000Z: feat: add user suspend and ban actions (wip)
+- 2026-02-18T10:22:16.000Z: fix: user status badge colors (wip)
+- 2026-02-18T13:48:36.000Z: feat: create dashboard overview with stat cards
+- 2026-02-19T16:06:37.000Z: fix: user status badge colors
+- 2026-02-19T16:56:08.000Z: style: improve dashboard grid layout
+- 2026-02-19T15:04:46.000Z: feat: implement header with notifications
+- 2026-02-19T09:15:25.000Z: feat: create user detail view tabs
+- 2026-02-19T13:21:22.000Z: fix: user status badge colors
+- 2026-02-19T12:50:41.000Z: feat: add user suspend and ban actions
+- 2026-02-19T10:43:57.000Z: style: improve dashboard grid layout
+- 2026-02-21T14:56:04.000Z: feat: create dashboard overview with stat cards
+- 2026-02-21T10:49:13.000Z: feat: add activity feed to dashboard
+- 2026-02-21T10:48:20.000Z: fix: user status badge colors
+- 2026-02-21T12:25:45.000Z: feat: implement header with notifications
+- 2026-02-21T09:19:07.000Z: style: improve dashboard grid layout
+- 2026-02-21T16:58:14.000Z: feat: create admin layout with sidebar (wip)
+- 2026-02-22T14:45:25.000Z: feat: implement header with notifications
+- 2026-02-22T11:23:44.000Z: fix: user status badge colors
+- 2026-02-22T16:28:19.000Z: feat: create dashboard overview with stat cards
+- 2026-02-22T16:11:55.000Z: feat: create user list with filters (wip)
+- 2026-02-22T14:25:47.000Z: feat: add activity feed to dashboard
+- 2026-02-22T09:10:09.000Z: feat: create user detail view tabs (wip)
+- 2026-02-22T12:32:57.000Z: fix: user status badge colors
+- 2026-02-23T16:26:45.000Z: style: improve dashboard grid layout (wip)
+- 2026-02-23T08:10:54.000Z: feat: create admin layout with sidebar
+- 2026-02-23T13:22:56.000Z: feat: create dashboard overview with stat cards
+- 2026-02-23T10:57:54.000Z: feat: create user detail view tabs
+- 2026-02-23T11:23:19.000Z: feat: create admin layout with sidebar
+- 2026-02-23T13:34:37.000Z: feat: create dashboard overview with stat cards
+- 2026-02-24T11:55:12.000Z: feat: implement user pagination and search (wip)
+- 2026-02-24T08:38:36.000Z: fix: user status badge colors (wip)
+- 2026-02-24T15:28:44.000Z: feat: create admin layout with sidebar
+- 2026-02-24T12:42:13.000Z: feat: create admin layout with sidebar
+- 2026-02-24T15:46:02.000Z: feat: add user suspend and ban actions
+- 2026-02-24T10:54:21.000Z: fix: user status badge colors (wip)
+- 2026-02-24T15:45:49.000Z: fix: user status badge colors
+- 2026-02-25T16:29:36.000Z: feat: create admin layout with sidebar
+- 2026-02-25T15:23:42.000Z: feat: create user list with filters (wip)
+- 2026-02-25T09:28:32.000Z: feat: create admin layout with sidebar
+- 2026-02-25T08:36:16.000Z: feat: create user detail view tabs (wip)
+- 2026-02-25T08:57:23.000Z: feat: create admin layout with sidebar
+- 2026-02-25T14:18:38.000Z: feat: create dashboard overview with stat cards
+- 2026-02-25T12:49:40.000Z: feat: implement user pagination and search (wip)
+- 2026-02-25T11:13:59.000Z: feat: create user detail view tabs
+- 2026-02-25T16:38:03.000Z: feat: add user suspend and ban actions
+- 2026-02-26T08:04:21.000Z: feat: implement header with notifications
+- 2026-02-26T16:52:45.000Z: style: improve dashboard grid layout
+- 2026-02-26T08:52:17.000Z: feat: add user suspend and ban actions
+- 2026-02-26T11:07:22.000Z: feat: create user list with filters
+- 2026-02-26T12:29:29.000Z: style: improve dashboard grid layout
+- 2026-02-26T12:49:14.000Z: feat: add activity feed to dashboard (wip)
+- 2026-02-26T16:21:16.000Z: fix: user status badge colors
+- 2026-02-26T14:23:28.000Z: feat: create user list with filters
+- 2026-02-27T11:18:27.000Z: feat: create user list with filters
+- 2026-02-27T10:58:11.000Z: feat: create user list with filters (wip)
+- 2026-02-27T12:35:56.000Z: feat: create admin layout with sidebar
+- 2026-02-28T12:21:32.000Z: feat: create dashboard overview with stat cards (wip)
+- 2026-02-28T16:38:20.000Z: style: improve dashboard grid layout
+- 2026-02-28T10:58:54.000Z: feat: add user suspend and ban actions (wip)
+- 2026-03-02T08:26:03.000Z: feat: implement header with notifications
+- 2026-03-02T11:02:49.000Z: feat: add activity feed to dashboard
+- 2026-03-02T09:09:39.000Z: feat: add activity feed to dashboard
+- 2026-03-02T14:25:32.000Z: feat: add user suspend and ban actions
+- 2026-03-03T09:36:11.000Z: feat: implement header with notifications (wip)
+- 2026-03-03T11:41:30.000Z: feat: add activity feed to dashboard (wip)
+- 2026-03-03T09:46:19.000Z: feat: create dashboard overview with stat cards (wip)
+- 2026-03-03T13:26:22.000Z: feat: create dashboard overview with stat cards
+- 2026-03-03T09:55:16.000Z: feat: implement user pagination and search
+- 2026-03-03T16:16:00.000Z: feat: implement user pagination and search (wip)
+- 2026-03-04T11:07:10.000Z: feat: create user detail view tabs (wip)
+- 2026-03-04T16:20:37.000Z: feat: create user detail view tabs (wip)
+- 2026-03-04T08:12:24.000Z: fix: user status badge colors
+- 2026-03-06T10:09:03.000Z: feat: create user list with filters
+- 2026-03-06T09:01:52.000Z: feat: add user suspend and ban actions (wip)
+- 2026-03-06T08:55:09.000Z: feat: create user detail view tabs
+- 2026-03-06T16:52:59.000Z: feat: create dashboard overview with stat cards
+- 2026-03-06T15:49:14.000Z: fix: user status badge colors
+- 2026-03-06T12:52:26.000Z: feat: add activity feed to dashboard
+- 2026-03-06T12:04:26.000Z: feat: add activity feed to dashboard
+- 2026-03-08T12:59:55.000Z: feat: create user list with filters
+- 2026-03-08T15:28:39.000Z: fix: user status badge colors
+- 2026-03-08T12:52:05.000Z: feat: create admin layout with sidebar
+- 2026-03-08T09:44:48.000Z: feat: add activity feed to dashboard (wip)
+- 2026-03-09T15:45:42.000Z: feat: create dashboard overview with stat cards (wip)
+- 2026-03-09T08:13:31.000Z: feat: create user list with filters
+- 2026-03-09T09:41:10.000Z: feat: create dashboard overview with stat cards (wip)
+- 2026-03-09T14:13:18.000Z: feat: implement header with notifications
+- 2026-03-10T14:25:49.000Z: feat: create user detail view tabs (wip)
+- 2026-03-10T09:18:44.000Z: feat: create user list with filters
+- 2026-03-10T14:55:33.000Z: feat: create user list with filters
+- 2026-03-10T16:22:52.000Z: feat: create admin layout with sidebar (wip)
+- 2026-03-12T13:51:22.000Z: feat: create admin layout with sidebar (wip)
+- 2026-03-12T10:28:13.000Z: feat: create user detail view tabs (wip)
+- 2026-03-12T16:28:14.000Z: feat: create admin layout with sidebar (wip)
+- 2026-03-12T09:21:24.000Z: feat: create admin layout with sidebar (wip)
+- 2026-03-12T08:07:28.000Z: style: improve dashboard grid layout
+- 2026-03-14T08:38:47.000Z: feat: create admin layout with sidebar (wip)
+- 2026-03-14T09:26:14.000Z: fix: user status badge colors
+- 2026-03-14T12:49:02.000Z: feat: create user list with filters
+- 2026-03-15T15:48:46.000Z: feat: create dashboard overview with stat cards
+- 2026-03-15T08:01:38.000Z: fix: user status badge colors (wip)
+- 2026-03-15T16:32:44.000Z: feat: create admin layout with sidebar
+- 2026-03-15T08:17:20.000Z: feat: implement header with notifications
+- 2026-03-18T11:14:40.000Z: feat: add activity feed to dashboard
+- 2026-03-18T15:15:34.000Z: feat: implement header with notifications
+- 2026-03-18T09:18:35.000Z: feat: create admin layout with sidebar
+- 2026-03-18T14:03:45.000Z: style: improve dashboard grid layout
+- 2026-03-18T13:28:19.000Z: feat: add activity feed to dashboard (wip)
+- 2026-03-18T11:36:24.000Z: feat: add user suspend and ban actions
+- 2026-03-18T15:34:13.000Z: feat: create dashboard overview with stat cards
+- 2026-03-18T15:51:27.000Z: feat: implement header with notifications
+- 2026-03-20T16:53:58.000Z: feat: create user list with filters (wip)
+- 2026-03-20T12:53:18.000Z: feat: create user list with filters (wip)
+- 2026-03-20T10:48:09.000Z: feat: add user suspend and ban actions
+- 2026-03-20T15:57:29.000Z: style: improve dashboard grid layout
+- 2026-03-20T08:27:11.000Z: fix: user status badge colors
+- 2026-03-20T08:51:25.000Z: feat: implement header with notifications
+- 2026-03-20T10:24:48.000Z: feat: implement header with notifications (wip)
+- 2026-03-21T08:19:56.000Z: feat: implement header with notifications (wip)
+- 2026-03-21T16:54:15.000Z: feat: implement header with notifications
+- 2026-03-21T15:34:26.000Z: feat: create user list with filters
+- 2026-03-21T15:06:52.000Z: feat: implement user pagination and search
+- 2026-03-21T12:01:06.000Z: feat: add user suspend and ban actions
+- 2026-03-21T16:16:08.000Z: feat: add activity feed to dashboard (wip)
+- 2026-03-21T12:32:23.000Z: feat: implement user pagination and search (wip)
+- 2026-03-21T16:58:40.000Z: feat: create user detail view tabs
+- 2026-03-21T09:36:08.000Z: fix: user status badge colors
+- 2026-03-22T11:47:03.000Z: feat: implement user pagination and search
+- 2026-03-22T15:27:50.000Z: feat: create dashboard overview with stat cards
+- 2026-03-22T15:46:58.000Z: feat: implement header with notifications
+- 2026-03-22T15:58:02.000Z: style: improve dashboard grid layout
+- 2026-03-22T11:17:01.000Z: feat: implement header with notifications
+- 2026-03-22T16:18:24.000Z: fix: user status badge colors (wip)
+- 2026-03-22T16:46:49.000Z: feat: add activity feed to dashboard
+- 2026-03-23T16:50:29.000Z: feat: add activity feed to dashboard (wip)
+- 2026-03-23T11:26:46.000Z: feat: create dashboard overview with stat cards
+- 2026-03-23T16:29:57.000Z: fix: user status badge colors
+- 2026-03-23T14:00:51.000Z: feat: implement header with notifications
+- 2026-03-26T09:46:05.000Z: feat: create verification checklist
+- 2026-03-26T10:10:27.000Z: feat: add featured provider toggle
+- 2026-03-26T13:30:15.000Z: feat: create verification checklist (wip)
+- 2026-03-27T15:44:56.000Z: fix: document viewer image scaling
+- 2026-03-27T16:09:03.000Z: feat: implement verification queue
+- 2026-03-27T09:05:50.000Z: feat: add document viewer modal
+- 2026-03-27T12:53:42.000Z: fix: document viewer image scaling (wip)
+- 2026-03-27T16:56:42.000Z: feat: add document viewer modal
+- 2026-03-27T14:00:23.000Z: feat: add reject with reason workflow
+- 2026-03-27T09:44:46.000Z: feat: add document viewer modal (wip)
+- 2026-03-27T14:19:46.000Z: refactor: extract verification actions (wip)
+- 2026-03-28T12:58:34.000Z: feat: implement verification queue
+- 2026-03-28T09:49:30.000Z: feat: add reject with reason workflow (wip)
+- 2026-03-28T11:09:32.000Z: fix: document viewer image scaling
+- 2026-03-28T15:53:04.000Z: feat: create verification checklist
+- 2026-03-29T10:11:48.000Z: feat: add featured provider toggle
+- 2026-03-29T14:33:56.000Z: feat: implement provider category filters
+- 2026-03-29T09:58:33.000Z: refactor: extract verification actions
+- 2026-03-29T08:19:53.000Z: feat: create verification checklist
+- 2026-03-29T14:23:06.000Z: feat: implement provider category filters (wip)
+- 2026-03-29T14:59:56.000Z: feat: create provider detail page (wip)
+- 2026-03-30T07:42:07.000Z: feat: implement provider category filters
+- 2026-03-30T08:44:38.000Z: feat: implement provider category filters
+- 2026-03-30T12:01:23.000Z: feat: implement provider category filters
+- 2026-03-31T12:25:02.000Z: feat: create provider list view
+- 2026-03-31T08:40:54.000Z: feat: add featured provider toggle
+- 2026-03-31T09:25:01.000Z: fix: document viewer image scaling (wip)
+- 2026-04-01T11:23:00.000Z: feat: add document viewer modal (wip)
+- 2026-04-01T08:16:22.000Z: feat: implement verification queue (wip)
+- 2026-04-01T09:15:08.000Z: fix: document viewer image scaling
+- 2026-04-01T09:10:09.000Z: fix: document viewer image scaling
+- 2026-04-03T12:25:09.000Z: refactor: extract verification actions (wip)
+- 2026-04-03T07:29:03.000Z: feat: add document viewer modal
+- 2026-04-03T15:32:07.000Z: feat: add reject with reason workflow
+- 2026-04-03T15:32:47.000Z: feat: create verification checklist
+- 2026-04-03T09:13:36.000Z: feat: add document viewer modal
+- 2026-04-04T15:16:41.000Z: fix: document viewer image scaling
+- 2026-04-04T15:38:29.000Z: fix: document viewer image scaling
+- 2026-04-04T14:55:05.000Z: refactor: extract verification actions (wip)
+- 2026-04-04T14:45:44.000Z: refactor: extract verification actions (wip)
+- 2026-04-05T10:12:57.000Z: fix: document viewer image scaling (wip)
+- 2026-04-05T09:41:08.000Z: feat: add document viewer modal (wip)
+- 2026-04-05T09:30:51.000Z: feat: create verification checklist
+- 2026-04-05T14:52:16.000Z: feat: create provider detail page
+- 2026-04-05T15:55:35.000Z: feat: create verification checklist (wip)
+- 2026-04-05T12:00:59.000Z: feat: create provider list view (wip)
+- 2026-04-07T15:25:49.000Z: feat: add reject with reason workflow
+- 2026-04-07T14:45:12.000Z: feat: add document viewer modal
+- 2026-04-07T12:37:04.000Z: feat: create verification checklist (wip)
+- 2026-04-07T07:06:34.000Z: fix: document viewer image scaling
+- 2026-04-07T11:20:29.000Z: feat: create provider list view
+- 2026-04-07T10:55:09.000Z: feat: add reject with reason workflow
+- 2026-04-07T13:16:37.000Z: feat: add reject with reason workflow (wip)
+- 2026-04-07T08:51:29.000Z: feat: add featured provider toggle
+- 2026-04-12T14:41:57.000Z: feat: implement verification queue
+- 2026-04-12T09:27:53.000Z: feat: add document viewer modal (wip)
+- 2026-04-12T07:10:47.000Z: fix: document viewer image scaling
+- 2026-04-13T09:53:57.000Z: fix: document viewer image scaling
+- 2026-04-13T12:25:47.000Z: fix: document viewer image scaling
+- 2026-04-13T14:38:10.000Z: feat: implement provider category filters (wip)
+- 2026-04-13T13:04:38.000Z: fix: document viewer image scaling
+- 2026-04-13T13:36:04.000Z: feat: create verification checklist (wip)
+- 2026-04-13T09:20:01.000Z: fix: document viewer image scaling
+- 2026-04-13T08:19:36.000Z: feat: create verification checklist
+- 2026-04-15T07:58:31.000Z: feat: create provider list view (wip)
+- 2026-04-15T07:53:24.000Z: feat: implement verification queue
+- 2026-04-15T08:01:14.000Z: feat: create provider list view (wip)
+- 2026-04-15T12:02:40.000Z: fix: document viewer image scaling
+- 2026-04-15T13:38:40.000Z: feat: add document viewer modal
+- 2026-04-15T08:01:19.000Z: feat: create verification checklist
+- 2026-04-16T11:37:22.000Z: fix: document viewer image scaling
+- 2026-04-16T07:35:48.000Z: feat: create verification checklist (wip)
+- 2026-04-16T11:33:54.000Z: feat: add featured provider toggle
+- 2026-04-18T13:18:40.000Z: feat: implement provider category filters
+- 2026-04-18T08:31:56.000Z: feat: add reject with reason workflow
+- 2026-04-18T08:27:44.000Z: feat: implement provider category filters
+- 2026-04-18T15:27:38.000Z: feat: add reject with reason workflow
+- 2026-04-18T08:27:55.000Z: feat: add reject with reason workflow
+- 2026-04-18T13:54:49.000Z: feat: implement verification queue
+- 2026-04-18T13:29:20.000Z: fix: document viewer image scaling (wip)
+- 2026-04-19T15:39:12.000Z: fix: document viewer image scaling
+- 2026-04-19T12:26:33.000Z: feat: add document viewer modal
+- 2026-04-19T11:26:18.000Z: feat: add document viewer modal
+- 2026-04-21T11:51:11.000Z: feat: implement verification queue
+- 2026-04-21T10:00:00.000Z: feat: implement provider category filters
+- 2026-04-21T08:43:40.000Z: fix: document viewer image scaling
+- 2026-04-21T11:01:24.000Z: feat: create provider list view
+- 2026-04-21T10:35:57.000Z: feat: add document viewer modal (wip)
+- 2026-04-21T11:37:36.000Z: feat: implement provider category filters
+- 2026-04-21T14:15:32.000Z: feat: implement provider category filters
+- 2026-04-21T08:57:57.000Z: feat: create provider list view
+- 2026-04-21T08:36:49.000Z: feat: create verification checklist
+- 2026-04-22T08:03:51.000Z: feat: implement verification queue
+- 2026-04-22T15:49:16.000Z: feat: implement verification queue (wip)
+- 2026-04-22T15:08:51.000Z: fix: document viewer image scaling
+- 2026-04-22T07:50:27.000Z: feat: add featured provider toggle
+- 2026-04-22T10:16:26.000Z: feat: create verification checklist
+- 2026-04-26T08:00:33.000Z: feat: create provider list view (wip)
+- 2026-04-26T14:11:09.000Z: feat: create provider detail page (wip)
+- 2026-04-26T09:55:18.000Z: feat: add reject with reason workflow
+- 2026-04-26T09:14:16.000Z: feat: add document viewer modal
+- 2026-04-27T08:42:22.000Z: feat: implement provider category filters
+- 2026-04-27T09:44:52.000Z: feat: create provider list view
+- 2026-04-27T12:11:02.000Z: feat: create provider detail page
+- 2026-04-27T10:23:25.000Z: feat: create provider detail page (wip)
+- 2026-04-27T09:17:46.000Z: refactor: extract verification actions
+- 2026-04-27T15:37:24.000Z: feat: implement verification queue (wip)
+- 2026-04-27T13:37:44.000Z: feat: implement verification queue
+- 2026-04-30T12:58:16.000Z: feat: add featured provider toggle
+- 2026-04-30T09:06:01.000Z: refactor: extract verification actions (wip)
+- 2026-04-30T09:52:54.000Z: feat: create provider list view
+- 2026-04-30T07:11:51.000Z: feat: add reject with reason workflow
+- 2026-04-30T15:09:07.000Z: feat: implement provider category filters (wip)
+- 2026-05-01T12:00:08.000Z: feat: create verification checklist
+- 2026-05-01T07:34:47.000Z: feat: create verification checklist
+- 2026-05-01T08:37:22.000Z: feat: create verification checklist
+- 2026-05-01T12:39:31.000Z: feat: create verification checklist
+- 2026-05-01T15:08:32.000Z: feat: create verification checklist
+- 2026-05-01T14:21:36.000Z: fix: document viewer image scaling
+- 2026-05-01T10:05:21.000Z: feat: create provider detail page (wip)
+- 2026-05-01T08:56:30.000Z: refactor: extract verification actions
+- 2026-05-05T08:55:10.000Z: feat: create booking detail page with timeline
+- 2026-05-05T08:39:41.000Z: feat: create platform fee configuration
+- 2026-05-05T15:45:39.000Z: feat: create payout management interface (wip)
+- 2026-05-05T13:46:09.000Z: feat: create payout management interface
+- 2026-05-07T08:13:26.000Z: feat: create financial overview dashboard
+- 2026-05-07T08:00:34.000Z: feat: create booking detail page with timeline
+- 2026-05-07T07:29:45.000Z: fix: escrow balance calculation logic
+- 2026-05-07T07:53:55.000Z: fix: escrow balance calculation logic
+- 2026-05-07T10:07:18.000Z: feat: create booking detail page with timeline
+- 2026-05-07T08:45:00.000Z: fix: escrow balance calculation logic
+- 2026-05-07T15:13:29.000Z: feat: create platform fee configuration
+- 2026-05-07T07:40:55.000Z: feat: create payout management interface (wip)
+- 2026-05-07T10:48:30.000Z: feat: create booking list with status tabs (wip)
+- 2026-05-10T10:26:27.000Z: feat: add refund approval workflow
+- 2026-05-10T07:59:58.000Z: feat: create payout management interface (wip)
+- 2026-05-10T15:26:47.000Z: feat: create financial overview dashboard
+- 2026-05-10T07:35:14.000Z: feat: create booking list with status tabs
+- 2026-05-10T15:39:56.000Z: feat: create platform fee configuration
+- 2026-05-10T10:25:31.000Z: feat: create financial overview dashboard
+- 2026-05-10T12:17:07.000Z: fix: escrow balance calculation logic
+- 2026-05-10T07:56:50.000Z: feat: create booking list with status tabs
+- 2026-05-10T11:18:26.000Z: feat: create booking list with status tabs
+- 2026-05-11T08:37:27.000Z: feat: create platform fee configuration
+- 2026-05-11T14:00:45.000Z: fix: escrow balance calculation logic (wip)
+- 2026-05-11T15:02:18.000Z: feat: implement transaction ledger
+- 2026-05-11T07:26:36.000Z: feat: add refund approval workflow (wip)
+- 2026-05-11T09:40:16.000Z: feat: add refund approval workflow (wip)
+- 2026-05-11T10:42:59.000Z: feat: create platform fee configuration
+- 2026-05-11T12:18:32.000Z: feat: create financial overview dashboard
+- 2026-05-11T09:44:22.000Z: feat: implement booking calendar view
+- 2026-05-11T15:15:41.000Z: feat: add refund approval workflow (wip)
+- 2026-05-13T11:23:54.000Z: feat: add refund approval workflow
+- 2026-05-13T07:32:09.000Z: feat: create booking detail page with timeline
+- 2026-05-13T07:49:49.000Z: feat: create financial overview dashboard
+- 2026-05-13T14:12:16.000Z: feat: create booking list with status tabs
+- 2026-05-13T08:37:04.000Z: feat: create booking detail page with timeline
+- 2026-05-13T12:58:04.000Z: feat: create financial overview dashboard
+- 2026-05-13T09:33:11.000Z: feat: create booking list with status tabs
+- 2026-05-16T15:17:14.000Z: feat: implement booking calendar view (wip)
+- 2026-05-16T07:13:17.000Z: feat: implement booking calendar view (wip)
+- 2026-05-16T08:00:24.000Z: feat: add admin booking override actions (wip)
+- 2026-05-20T13:31:37.000Z: fix: escrow balance calculation logic
+- 2026-05-20T09:36:47.000Z: feat: create financial overview dashboard (wip)
+- 2026-05-20T13:02:44.000Z: fix: escrow balance calculation logic (wip)
+- 2026-05-20T13:00:46.000Z: feat: add refund approval workflow (wip)
+- 2026-05-23T14:09:26.000Z: feat: create payout management interface
+- 2026-05-23T14:02:52.000Z: fix: escrow balance calculation logic
+- 2026-05-23T07:46:59.000Z: feat: create booking list with status tabs (wip)
+- 2026-05-23T14:58:56.000Z: feat: implement booking calendar view
+- 2026-05-23T07:53:51.000Z: feat: add admin booking override actions (wip)
+- 2026-05-23T08:33:38.000Z: feat: add admin booking override actions
+- 2026-05-23T11:44:29.000Z: feat: create booking detail page with timeline
+- 2026-05-23T11:19:06.000Z: feat: create booking detail page with timeline (wip)
+- 2026-05-23T07:10:22.000Z: feat: add refund approval workflow
+- 2026-05-24T09:41:58.000Z: fix: escrow balance calculation logic
+- 2026-05-24T09:42:02.000Z: feat: create payout management interface
+- 2026-05-24T14:22:04.000Z: feat: implement transaction ledger
+- 2026-05-24T13:12:43.000Z: feat: add admin booking override actions
+- 2026-05-24T14:36:38.000Z: feat: create booking list with status tabs
+- 2026-05-25T12:04:09.000Z: feat: add refund approval workflow
+- 2026-05-25T11:03:48.000Z: feat: create booking detail page with timeline (wip)
+- 2026-05-25T13:29:50.000Z: feat: add refund approval workflow
+- 2026-05-25T14:02:37.000Z: fix: escrow balance calculation logic (wip)
+- 2026-05-25T15:23:32.000Z: feat: create platform fee configuration
+- 2026-05-25T13:31:04.000Z: feat: implement transaction ledger (wip)
+- 2026-05-26T07:26:23.000Z: feat: implement booking calendar view
+- 2026-05-26T13:23:59.000Z: fix: escrow balance calculation logic
+- 2026-05-26T11:49:00.000Z: feat: implement transaction ledger (wip)
+- 2026-05-26T14:28:05.000Z: feat: create payout management interface (wip)
+- 2026-05-26T11:55:58.000Z: feat: add admin booking override actions
+- 2026-05-26T11:58:01.000Z: feat: implement booking calendar view (wip)
+- 2026-05-26T09:31:36.000Z: feat: create payout management interface
+- 2026-05-27T09:10:15.000Z: feat: add admin booking override actions (wip)
+- 2026-05-27T09:08:52.000Z: fix: escrow balance calculation logic (wip)
+- 2026-05-27T10:43:01.000Z: feat: create platform fee configuration
+- 2026-05-27T14:06:57.000Z: feat: create platform fee configuration
+- 2026-05-27T08:46:01.000Z: feat: implement booking calendar view
+- 2026-05-27T14:10:10.000Z: feat: add refund approval workflow (wip)
+- 2026-05-28T15:57:05.000Z: feat: create booking list with status tabs
+- 2026-05-28T07:20:59.000Z: feat: add admin booking override actions
+- 2026-05-28T12:47:55.000Z: feat: implement transaction ledger
+- 2026-05-29T14:39:38.000Z: feat: add refund approval workflow
+- 2026-05-29T09:31:07.000Z: feat: add admin booking override actions (wip)
+- 2026-05-29T14:02:17.000Z: fix: escrow balance calculation logic (wip)
+- 2026-05-29T09:54:47.000Z: feat: add admin booking override actions
+- 2026-05-29T15:19:39.000Z: feat: create financial overview dashboard
+- 2026-05-29T09:42:30.000Z: feat: implement booking calendar view
+- 2026-05-29T14:13:27.000Z: feat: add refund approval workflow (wip)
+- 2026-05-29T13:24:52.000Z: feat: create booking detail page with timeline (wip)
+- 2026-05-29T14:30:34.000Z: feat: create financial overview dashboard
+- 2026-06-01T13:15:30.000Z: feat: create payout management interface
+- 2026-06-01T07:48:27.000Z: feat: create payout management interface
+- 2026-06-01T11:48:20.000Z: feat: create booking list with status tabs
+- 2026-06-03T10:38:11.000Z: feat: add refund approval workflow
+- 2026-06-03T10:38:42.000Z: feat: create booking detail page with timeline
+- 2026-06-03T10:21:58.000Z: feat: implement booking calendar view
+- 2026-06-04T15:19:54.000Z: feat: implement booking calendar view
+- 2026-06-04T10:42:33.000Z: feat: create booking list with status tabs (wip)
+- 2026-06-04T12:58:59.000Z: feat: implement booking calendar view
+- 2026-06-04T12:24:12.000Z: feat: create financial overview dashboard
+- 2026-06-04T07:34:18.000Z: feat: create booking list with status tabs
+- 2026-06-04T12:34:03.000Z: feat: create financial overview dashboard
+- 2026-06-04T15:51:08.000Z: feat: add admin booking override actions (wip)
+- 2026-06-04T15:08:16.000Z: feat: create platform fee configuration
+- 2026-06-05T14:41:57.000Z: feat: create payout management interface
+- 2026-06-05T08:38:15.000Z: feat: add refund approval workflow (wip)
+- 2026-06-05T08:17:22.000Z: feat: add admin booking override actions
+- 2026-06-05T15:42:55.000Z: feat: create payout management interface (wip)
+- 2026-06-05T14:03:04.000Z: feat: implement transaction ledger (wip)
+- 2026-06-07T10:40:56.000Z: feat: create platform fee configuration
+- 2026-06-07T15:26:43.000Z: feat: create booking detail page with timeline (wip)
+- 2026-06-07T14:16:34.000Z: feat: add admin booking override actions
+- 2026-06-07T08:46:51.000Z: feat: create platform fee configuration (wip)
+- 2026-06-07T12:34:53.000Z: feat: add refund approval workflow
+- 2026-06-07T08:06:02.000Z: feat: create payout management interface
+- 2026-06-07T13:54:42.000Z: fix: escrow balance calculation logic
+- 2026-06-11T09:55:01.000Z: feat: create review moderation queue
+- 2026-06-11T07:27:28.000Z: style: improve dispute priority badges
+- 2026-06-11T14:07:47.000Z: feat: create dispute list with SLA timers
+- 2026-06-11T12:58:48.000Z: feat: add internal notes to tickets
+- 2026-06-11T07:29:48.000Z: feat: create support ticket list (wip)
+- 2026-06-11T11:28:16.000Z: feat: add internal notes to tickets
+- 2026-06-11T12:14:14.000Z: feat: add internal notes to tickets
+- 2026-06-13T13:18:28.000Z: feat: implement dispute detail and resolution
+- 2026-06-13T12:36:32.000Z: feat: implement ticket conversation thread (wip)
+- 2026-06-13T12:39:14.000Z: feat: implement dispute detail and resolution
+- 2026-06-13T09:09:45.000Z: feat: implement chat flag viewer
+- 2026-06-13T11:14:40.000Z: feat: add profile flag moderation (wip)
+- 2026-06-13T07:26:47.000Z: fix: chat viewer scroll behavior
+- 2026-06-13T14:15:56.000Z: feat: implement dispute detail and resolution
+- 2026-06-13T07:01:07.000Z: feat: implement dispute detail and resolution
+- 2026-06-18T07:55:10.000Z: feat: add internal notes to tickets
+- 2026-06-18T13:55:49.000Z: fix: chat viewer scroll behavior
+- 2026-06-18T08:02:57.000Z: feat: implement ticket conversation thread
+- 2026-06-18T15:48:20.000Z: feat: implement ticket conversation thread
+- 2026-06-18T09:00:10.000Z: feat: implement chat flag viewer
+- 2026-06-18T13:00:44.000Z: feat: implement ticket conversation thread
+- 2026-06-18T11:27:05.000Z: feat: create dispute list with SLA timers
+- 2026-06-18T08:50:28.000Z: feat: create review moderation queue
+- 2026-06-18T07:36:10.000Z: style: improve dispute priority badges
+- 2026-06-19T12:13:31.000Z: feat: add profile flag moderation
+- 2026-06-19T10:17:33.000Z: feat: add internal notes to tickets
+- 2026-06-19T14:50:25.000Z: feat: add profile flag moderation
+- 2026-06-20T07:46:46.000Z: feat: implement dispute detail and resolution
+- 2026-06-20T07:01:08.000Z: fix: chat viewer scroll behavior
+- 2026-06-20T09:06:55.000Z: feat: create support ticket list
+- 2026-06-22T08:52:54.000Z: feat: add internal notes to tickets
+- 2026-06-22T15:17:51.000Z: feat: create support ticket list
+- 2026-06-22T07:32:18.000Z: feat: add profile flag moderation (wip)
+- 2026-06-23T07:55:23.000Z: style: improve dispute priority badges (wip)
+- 2026-06-23T13:40:56.000Z: feat: create review moderation queue
+- 2026-06-23T10:56:02.000Z: feat: create support ticket list
+- 2026-06-23T12:42:15.000Z: feat: implement dispute detail and resolution
+- 2026-06-23T07:15:51.000Z: feat: implement dispute detail and resolution
+- 2026-06-23T10:35:00.000Z: feat: add internal notes to tickets
+- 2026-06-23T13:13:50.000Z: feat: create support ticket list
+- 2026-06-24T14:03:51.000Z: style: improve dispute priority badges
+- 2026-06-24T09:12:51.000Z: fix: chat viewer scroll behavior
+- 2026-06-24T08:00:43.000Z: feat: create review moderation queue
+- 2026-06-24T08:24:43.000Z: feat: add internal notes to tickets
+- 2026-06-24T11:35:48.000Z: fix: chat viewer scroll behavior
+- 2026-06-24T11:07:49.000Z: feat: implement ticket conversation thread
+- 2026-06-24T08:18:02.000Z: style: improve dispute priority badges (wip)
+- 2026-06-24T10:13:54.000Z: fix: chat viewer scroll behavior
+- 2026-06-24T10:12:38.000Z: feat: add internal notes to tickets (wip)
+- 2026-06-26T11:52:03.000Z: feat: create support ticket list
+- 2026-06-26T07:03:34.000Z: style: improve dispute priority badges
+- 2026-06-26T15:39:48.000Z: feat: create dispute list with SLA timers
+- 2026-06-26T11:44:57.000Z: feat: create dispute list with SLA timers (wip)
+- 2026-06-26T08:15:36.000Z: feat: create support ticket list (wip)
+- 2026-06-26T07:49:06.000Z: feat: add internal notes to tickets (wip)
+- 2026-06-26T13:52:35.000Z: feat: create review moderation queue (wip)
+- 2026-06-26T09:50:11.000Z: feat: create support ticket list (wip)
+- 2026-06-26T11:03:45.000Z: feat: implement chat flag viewer
+- 2026-06-27T11:26:37.000Z: feat: implement chat flag viewer
+- 2026-06-27T12:37:33.000Z: feat: implement chat flag viewer
+- 2026-06-27T14:22:17.000Z: feat: add profile flag moderation
+- 2026-06-28T11:16:45.000Z: feat: implement ticket conversation thread
+- 2026-06-28T09:14:39.000Z: fix: chat viewer scroll behavior
+- 2026-06-28T10:33:54.000Z: feat: create dispute list with SLA timers
+- 2026-06-28T11:02:42.000Z: feat: add profile flag moderation
+- 2026-06-28T11:51:24.000Z: feat: implement dispute detail and resolution
+- 2026-06-28T12:06:18.000Z: feat: add internal notes to tickets
+- 2026-06-28T07:01:15.000Z: feat: create review moderation queue (wip)
+- 2026-06-28T09:27:21.000Z: feat: create review moderation queue
+- 2026-06-28T13:24:53.000Z: feat: implement chat flag viewer
+- 2026-06-29T13:39:07.000Z: feat: create review moderation queue
+- 2026-06-29T14:49:27.000Z: feat: implement ticket conversation thread
+- 2026-06-29T07:49:39.000Z: feat: create support ticket list (wip)
+- 2026-06-29T14:17:42.000Z: feat: create review moderation queue (wip)
+- 2026-06-29T11:19:50.000Z: feat: create review moderation queue (wip)
+- 2026-06-29T10:20:17.000Z: feat: implement ticket conversation thread
+- 2026-06-29T11:53:06.000Z: feat: create review moderation queue
+- 2026-07-02T12:46:12.000Z: feat: create review moderation queue
+- 2026-07-02T11:02:37.000Z: feat: add profile flag moderation
+- 2026-07-02T11:58:01.000Z: feat: add internal notes to tickets
+- 2026-07-02T13:15:05.000Z: feat: create support ticket list (wip)
+- 2026-07-03T13:10:13.000Z: feat: implement dispute detail and resolution (wip)
+- 2026-07-03T10:54:41.000Z: feat: create dispute list with SLA timers (wip)
+- 2026-07-03T07:45:35.000Z: fix: chat viewer scroll behavior
+- 2026-07-03T07:07:38.000Z: feat: create dispute list with SLA timers (wip)
+- 2026-07-03T11:36:45.000Z: feat: implement chat flag viewer
+- 2026-07-03T08:03:34.000Z: feat: add internal notes to tickets (wip)
+- 2026-07-04T07:55:50.000Z: feat: implement dispute detail and resolution
+- 2026-07-04T07:40:03.000Z: feat: implement ticket conversation thread
+- 2026-07-04T07:04:18.000Z: feat: implement chat flag viewer
+- 2026-07-04T07:46:06.000Z: feat: create dispute list with SLA timers
+- 2026-07-04T09:17:24.000Z: feat: add profile flag moderation
+- 2026-07-04T11:14:07.000Z: feat: create review moderation queue
+- 2026-07-04T14:22:04.000Z: feat: create support ticket list
+- 2026-07-04T10:26:10.000Z: style: improve dispute priority badges
+- 2026-07-04T10:09:07.000Z: feat: implement dispute detail and resolution
+- 2026-07-06T15:22:37.000Z: feat: create dispute list with SLA timers
+- 2026-07-06T15:10:32.000Z: fix: chat viewer scroll behavior (wip)
+- 2026-07-06T10:14:49.000Z: fix: chat viewer scroll behavior (wip)
+- 2026-07-06T15:23:17.000Z: feat: create review moderation queue
+- 2026-07-07T07:30:26.000Z: style: improve dispute priority badges (wip)
+- 2026-07-07T13:55:55.000Z: feat: create support ticket list
+- 2026-07-07T07:15:21.000Z: feat: create dispute list with SLA timers
+- 2026-07-07T12:07:40.000Z: feat: implement ticket conversation thread
+- 2026-07-07T11:14:53.000Z: feat: add internal notes to tickets
+- 2026-07-08T11:22:32.000Z: feat: implement chat flag viewer
+- 2026-07-08T14:00:58.000Z: feat: implement ticket conversation thread
+- 2026-07-08T14:10:02.000Z: feat: create review moderation queue
+- 2026-07-09T11:26:23.000Z: feat: create review moderation queue
+- 2026-07-09T12:16:13.000Z: feat: create support ticket list
+- 2026-07-09T11:56:13.000Z: feat: implement chat flag viewer (wip)
+- 2026-07-09T08:00:04.000Z: fix: chat viewer scroll behavior (wip)
+- 2026-07-09T13:19:34.000Z: feat: implement dispute detail and resolution
+- 2026-07-10T10:47:42.000Z: feat: add internal notes to tickets
+- 2026-07-10T12:04:31.000Z: style: improve dispute priority badges (wip)
+- 2026-07-10T13:45:40.000Z: feat: add profile flag moderation
+- 2026-07-10T07:59:27.000Z: feat: add profile flag moderation
+- 2026-07-10T08:49:42.000Z: feat: add internal notes to tickets
+- 2026-07-10T12:21:08.000Z: feat: create support ticket list
+- 2026-07-10T08:34:26.000Z: style: improve dispute priority badges (wip)
+- 2026-07-10T13:17:26.000Z: feat: create dispute list with SLA timers
+- 2026-07-11T14:06:12.000Z: feat: implement ticket conversation thread (wip)
+- 2026-07-11T14:28:05.000Z: feat: create dispute list with SLA timers
+- 2026-07-11T08:11:47.000Z: feat: implement dispute detail and resolution
+- 2026-07-11T13:06:12.000Z: fix: chat viewer scroll behavior
+- 2026-07-12T14:13:05.000Z: feat: add internal notes to tickets (wip)
+- 2026-07-12T08:31:45.000Z: feat: create review moderation queue
+- 2026-07-12T10:25:56.000Z: feat: create dispute list with SLA timers
+- 2026-07-12T13:13:15.000Z: feat: implement dispute detail and resolution (wip)
+- 2026-07-13T07:27:44.000Z: feat: create dispute list with SLA timers
+- 2026-07-13T13:19:16.000Z: feat: create dispute list with SLA timers
+- 2026-07-13T10:30:56.000Z: feat: implement dispute detail and resolution (wip)
+- 2026-07-13T09:08:01.000Z: feat: implement ticket conversation thread
+- 2026-07-13T09:19:16.000Z: feat: add internal notes to tickets
+- 2026-07-13T08:09:51.000Z: feat: create dispute list with SLA timers
+- 2026-07-13T09:14:43.000Z: feat: create support ticket list
+- 2026-07-13T07:01:58.000Z: feat: create dispute list with SLA timers (wip)
+- 2026-07-13T13:15:21.000Z: feat: create review moderation queue
+- 2026-07-15T08:13:58.000Z: feat: add internal notes to tickets
+- 2026-07-15T14:47:47.000Z: feat: create dispute list with SLA timers (wip)
+- 2026-07-15T11:38:09.000Z: style: improve dispute priority badges (wip)
+- 2026-07-17T07:44:42.000Z: feat: create dispute list with SLA timers (wip)
+- 2026-07-17T10:16:52.000Z: feat: create review moderation queue
+- 2026-07-17T14:53:38.000Z: feat: implement ticket conversation thread
+- 2026-07-17T14:26:05.000Z: feat: create review moderation queue
+- 2026-07-17T12:24:48.000Z: feat: implement ticket conversation thread
+- 2026-07-17T09:03:16.000Z: feat: implement dispute detail and resolution
+- 2026-07-17T08:35:28.000Z: fix: chat viewer scroll behavior
+- 2026-07-17T10:36:53.000Z: feat: create support ticket list (wip)
+- 2026-07-18T07:16:10.000Z: feat: add legal policy editors
+- 2026-07-18T09:52:01.000Z: feat: create email template editor
+- 2026-07-18T14:12:36.000Z: feat: create platform configuration editor (wip)
+- 2026-07-18T11:38:57.000Z: feat: create admin team list
+- 2026-07-18T11:07:50.000Z: feat: add legal policy editors
+- 2026-07-18T14:35:18.000Z: feat: create admin team list
+- 2026-07-19T15:41:16.000Z: feat: create email template editor
+- 2026-07-19T11:24:29.000Z: feat: implement category and location management
+- 2026-07-19T12:13:30.000Z: feat: create admin team list (wip)
+- 2026-07-19T07:34:22.000Z: feat: implement pre-built and custom reports (wip)
+- 2026-07-19T15:10:07.000Z: feat: implement translations management
+- 2026-07-19T09:38:59.000Z: feat: implement category and location management
+- 2026-07-19T08:23:23.000Z: chore: final UI polish and responsive fixes
+- 2026-07-19T14:03:21.000Z: feat: add legal policy editors
+- 2026-07-20T07:37:10.000Z: feat: create email template editor
+- 2026-07-20T15:02:51.000Z: feat: create email template editor
+- 2026-07-20T07:15:38.000Z: feat: add audit log viewer
+- 2026-07-22T15:28:54.000Z: feat: create platform configuration editor
+- 2026-07-22T12:21:15.000Z: feat: create admin team list (wip)
+- 2026-07-22T07:29:23.000Z: feat: create email template editor
+- 2026-07-22T12:32:49.000Z: feat: implement pre-built and custom reports
+- 2026-07-22T09:38:40.000Z: feat: add feature flag toggles
+- 2026-07-22T12:05:41.000Z: feat: create email template editor (wip)
+- 2026-07-22T07:34:36.000Z: feat: create platform configuration editor (wip)
+- 2026-07-23T09:21:55.000Z: feat: create email template editor
+- 2026-07-23T15:24:57.000Z: feat: create admin team list
+- 2026-07-23T09:03:27.000Z: feat: implement pre-built and custom reports (wip)
+- 2026-07-23T09:37:18.000Z: feat: add audit log viewer
+- 2026-07-24T10:49:32.000Z: feat: implement translations management
+- 2026-07-24T13:05:53.000Z: chore: final UI polish and responsive fixes (wip)
+- 2026-07-24T08:41:54.000Z: feat: add feature flag toggles
+- 2026-07-24T13:51:37.000Z: feat: implement category and location management
+- 2026-07-25T14:27:22.000Z: feat: implement pre-built and custom reports
+- 2026-07-25T14:44:19.000Z: feat: implement category and location management
+- 2026-07-25T11:49:28.000Z: feat: create platform configuration editor
+- 2026-07-25T09:43:30.000Z: chore: final UI polish and responsive fixes
+- 2026-07-25T12:42:38.000Z: feat: implement pre-built and custom reports (wip)
+- 2026-07-25T15:51:33.000Z: feat: implement translations management (wip)
+- 2026-07-25T08:24:28.000Z: feat: create email template editor
+- 2026-07-25T09:13:49.000Z: feat: implement pre-built and custom reports
+- 2026-07-25T14:58:09.000Z: feat: create email template editor
+- 2026-07-26T11:44:15.000Z: feat: create platform configuration editor
+- 2026-07-26T13:56:18.000Z: feat: add audit log viewer (wip)
+- 2026-07-26T13:14:45.000Z: chore: final UI polish and responsive fixes
+- 2026-07-26T10:56:58.000Z: feat: add legal policy editors
+- 2026-07-26T10:37:31.000Z: feat: add legal policy editors (wip)
+- 2026-07-26T09:40:13.000Z: feat: add feature flag toggles (wip)
+- 2026-07-27T15:41:05.000Z: feat: add audit log viewer (wip)
+- 2026-07-27T08:59:39.000Z: feat: implement pre-built and custom reports
+- 2026-07-27T13:52:30.000Z: feat: implement pre-built and custom reports (wip)
+- 2026-07-27T14:42:38.000Z: feat: add feature flag toggles
+- 2026-07-27T09:01:57.000Z: feat: add legal policy editors
+- 2026-07-28T13:54:17.000Z: feat: add legal policy editors
+- 2026-07-28T10:16:55.000Z: feat: implement pre-built and custom reports
+- 2026-07-28T15:25:39.000Z: chore: final UI polish and responsive fixes (wip)
+- 2026-07-28T15:42:30.000Z: feat: implement translations management
+- 2026-07-28T15:02:42.000Z: feat: create admin team list
+- 2026-07-30T14:19:49.000Z: feat: create email template editor
+- 2026-07-30T08:01:07.000Z: feat: create platform configuration editor
+- 2026-07-30T07:19:25.000Z: feat: implement category and location management (wip)
+- 2026-07-30T15:52:23.000Z: feat: implement translations management
+- 2026-07-30T14:59:34.000Z: feat: add audit log viewer
+- 2026-08-01T12:32:06.000Z: feat: create platform configuration editor
+- 2026-08-01T14:58:14.000Z: feat: add audit log viewer
+- 2026-08-01T11:44:04.000Z: feat: add feature flag toggles
+- 2026-08-01T11:21:46.000Z: feat: add audit log viewer
+- 2026-08-01T15:30:17.000Z: feat: create admin team list
+- 2026-08-01T09:47:28.000Z: feat: create platform configuration editor
+- 2026-08-04T12:59:18.000Z: feat: implement category and location management (wip)
+- 2026-08-04T10:25:14.000Z: feat: create email template editor
+- 2026-08-04T15:05:52.000Z: feat: add feature flag toggles
+- 2026-08-04T10:14:34.000Z: feat: implement pre-built and custom reports (wip)
+- 2026-08-04T10:15:56.000Z: feat: add legal policy editors (wip)
+- 2026-08-04T12:44:18.000Z: feat: add feature flag toggles (wip)
+- 2026-08-04T14:56:17.000Z: feat: implement category and location management
+- 2026-08-04T09:43:36.000Z: feat: create platform configuration editor
+- 2026-08-05T09:46:05.000Z: feat: add audit log viewer
+- 2026-08-05T11:25:35.000Z: feat: implement pre-built and custom reports
+- 2026-08-05T07:44:22.000Z: feat: create admin team list
+- 2026-08-07T14:37:35.000Z: feat: implement translations management
+- 2026-08-07T07:55:40.000Z: feat: add feature flag toggles
+- 2026-08-07T14:40:39.000Z: feat: add audit log viewer (wip)
+- 2026-08-07T08:03:13.000Z: feat: create email template editor (wip)
+- 2026-08-07T13:45:03.000Z: feat: implement translations management (wip)
+- 2026-08-07T07:45:37.000Z: feat: add audit log viewer
+- 2026-08-07T12:23:20.000Z: chore: final UI polish and responsive fixes (wip)
+- 2026-08-07T11:54:12.000Z: feat: add legal policy editors
+- 2026-08-08T13:49:10.000Z: feat: add audit log viewer
+- 2026-08-08T14:02:48.000Z: feat: create email template editor
+- 2026-08-08T10:42:38.000Z: chore: final UI polish and responsive fixes
+- 2026-08-08T09:50:11.000Z: feat: add feature flag toggles
+- 2026-08-08T11:42:37.000Z: chore: final UI polish and responsive fixes
+- 2026-08-08T15:01:34.000Z: feat: create admin team list
+- 2026-08-08T10:34:20.000Z: feat: implement translations management
+- 2026-08-10T08:51:07.000Z: feat: add audit log viewer
+- 2026-08-10T09:49:41.000Z: feat: create email template editor
+- 2026-08-10T12:44:08.000Z: feat: implement category and location management
+- 2026-08-10T11:43:14.000Z: feat: create email template editor (wip)
+- 2026-08-10T09:33:01.000Z: chore: final UI polish and responsive fixes
+- 2026-08-10T14:52:40.000Z: feat: add legal policy editors
+- 2026-08-10T11:22:42.000Z: feat: implement translations management
+- 2026-08-10T15:09:50.000Z: chore: final UI polish and responsive fixes
+- 2026-08-10T08:29:12.000Z: feat: create platform configuration editor (wip)
+- 2026-08-11T11:44:08.000Z: feat: implement translations management (wip)
+- 2026-08-11T13:49:27.000Z: feat: implement category and location management (wip)
+- 2026-08-11T14:50:34.000Z: feat: implement pre-built and custom reports (wip)
+- 2026-08-11T13:00:01.000Z: feat: add audit log viewer
+- 2026-08-11T14:13:12.000Z: feat: create email template editor
+- 2026-08-11T13:14:38.000Z: feat: implement translations management
+- 2026-08-13T13:55:33.000Z: feat: implement pre-built and custom reports
+- 2026-08-13T14:29:00.000Z: chore: final UI polish and responsive fixes
+- 2026-08-13T08:57:25.000Z: feat: create platform configuration editor
+- 2026-08-15T10:41:37.000Z: chore: final UI polish and responsive fixes
+- 2026-08-15T14:08:28.000Z: feat: create email template editor
+- 2026-08-15T11:46:51.000Z: feat: implement translations management
+- 2026-08-15T15:53:05.000Z: feat: add audit log viewer
+- 2026-08-15T08:04:15.000Z: feat: add audit log viewer
+- 2026-08-15T08:50:54.000Z: feat: implement pre-built and custom reports (wip)
+- 2026-08-15T15:11:45.000Z: feat: add legal policy editors
+- 2026-08-15T09:16:31.000Z: feat: implement pre-built and custom reports
+- 2026-08-16T09:47:20.000Z: feat: implement category and location management
+- 2026-08-16T07:22:27.000Z: feat: create admin team list
+- 2026-08-16T09:42:44.000Z: feat: create platform configuration editor
+- 2026-08-16T07:52:28.000Z: feat: add audit log viewer
+- 2026-08-16T07:07:04.000Z: feat: create platform configuration editor
+- 2026-08-16T10:32:23.000Z: feat: create email template editor
+- 2026-08-17T13:24:09.000Z: feat: add feature flag toggles
+- 2026-08-17T10:27:06.000Z: feat: implement translations management
+- 2026-08-17T13:34:10.000Z: feat: implement pre-built and custom reports
+- 2026-08-17T11:50:05.000Z: feat: add legal policy editors
+- 2026-08-17T12:15:09.000Z: chore: final UI polish and responsive fixes
+- 2026-08-17T14:11:28.000Z: feat: add audit log viewer
+- 2026-08-17T14:06:12.000Z: feat: add feature flag toggles (wip)
+- 2026-08-18T10:45:08.000Z: feat: add feature flag toggles (wip)
+- 2026-08-18T08:21:06.000Z: feat: implement pre-built and custom reports (wip)
+- 2026-08-18T14:48:20.000Z: chore: final UI polish and responsive fixes
+- 2026-08-18T11:15:11.000Z: chore: final UI polish and responsive fixes
+- 2026-08-18T07:08:06.000Z: feat: add legal policy editors
+- 2026-08-20T13:55:14.000Z: feat: create admin team list (wip)
+- 2026-08-20T15:12:14.000Z: feat: add legal policy editors (wip)
+- 2026-08-20T08:28:48.000Z: chore: final UI polish and responsive fixes (wip)
+- 2026-08-20T09:45:33.000Z: feat: add feature flag toggles (wip)
+- 2026-08-20T09:29:45.000Z: feat: add audit log viewer
+- 2026-08-20T08:53:26.000Z: feat: implement pre-built and custom reports
+- 2026-08-21T07:03:42.000Z: feat: create platform configuration editor (wip)
+- 2026-08-21T11:50:15.000Z: feat: implement translations management
+- 2026-08-21T12:11:07.000Z: feat: create admin team list
+- 2026-08-21T12:34:44.000Z: feat: add audit log viewer
+- 2026-08-21T11:36:06.000Z: feat: implement pre-built and custom reports
+- 2026-08-21T10:11:23.000Z: feat: add legal policy editors (wip)
+- 2026-08-21T14:29:29.000Z: chore: final UI polish and responsive fixes
+- 2026-08-22T15:47:06.000Z: feat: implement translations management
+- 2026-08-22T12:12:52.000Z: feat: implement category and location management (wip)
+- 2026-08-22T10:58:08.000Z: feat: add legal policy editors (wip)
+- 2026-08-24T08:42:46.000Z: feat: add audit log viewer
+- 2026-08-24T13:37:40.000Z: feat: add feature flag toggles
+- 2026-08-24T15:56:20.000Z: feat: add feature flag toggles
+- 2026-08-25T07:02:31.000Z: feat: add legal policy editors
+- 2026-08-25T11:04:55.000Z: chore: final UI polish and responsive fixes
+- 2026-08-25T12:50:36.000Z: chore: final UI polish and responsive fixes
+- 2026-08-25T11:48:40.000Z: chore: final UI polish and responsive fixes (wip)
+- 2026-08-25T15:07:02.000Z: feat: implement category and location management (wip)
+- 2026-08-25T12:14:25.000Z: feat: create admin team list
+- 2026-08-25T11:56:47.000Z: feat: implement translations management
+- 2026-08-25T10:50:01.000Z: feat: implement category and location management

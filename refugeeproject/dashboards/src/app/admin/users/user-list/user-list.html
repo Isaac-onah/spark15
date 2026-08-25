@@ -1,0 +1,99 @@
+<div class="space-y-6">
+  <app-breadcrumb [items]="[{label: 'Dashboard', route: '/admin/dashboard'}, {label: 'User Management', route: '/admin/users'}]"></app-breadcrumb>
+
+  <div class="sm:flex sm:items-center sm:justify-between">
+    <div>
+      <h1 class="text-2xl font-bold text-gray-900">Users</h1>
+      <p class="mt-2 text-sm text-gray-700">A list of all users in your platform including their name, title, email and role.</p>
+    </div>
+    <div class="mt-4 sm:mt-0">
+      <button (click)="exportToCsv()" class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+        Export CSV
+      </button>
+    </div>
+  </div>
+
+  <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+    <div class="w-full sm:w-96">
+      <app-search-input placeholder="Search users by name or email..." (searchChanged)="onSearch($event)"></app-search-input>
+    </div>
+    
+    <div class="flex space-x-2 border border-gray-200 rounded-lg p-1 bg-gray-50">
+      <button [class.bg-white]="statusFilter() === 'all'" [class.shadow]="statusFilter() === 'all'" class="px-4 py-1.5 text-sm font-medium rounded-md text-gray-700" (click)="setStatusFilter('all')">All</button>
+      <button [class.bg-white]="statusFilter() === 'active'" [class.shadow]="statusFilter() === 'active'" class="px-4 py-1.5 text-sm font-medium rounded-md text-gray-700" (click)="setStatusFilter('active')">Active</button>
+      <button [class.bg-white]="statusFilter() === 'suspended'" [class.shadow]="statusFilter() === 'suspended'" class="px-4 py-1.5 text-sm font-medium rounded-md text-gray-700" (click)="setStatusFilter('suspended')">Suspended</button>
+      <button [class.bg-white]="statusFilter() === 'banned'" [class.shadow]="statusFilter() === 'banned'" class="px-4 py-1.5 text-sm font-medium rounded-md text-gray-700" (click)="setStatusFilter('banned')">Banned</button>
+    </div>
+  </div>
+
+  <div class="bg-white shadow-sm ring-1 ring-black ring-opacity-5 md:rounded-xl overflow-hidden">
+    <table class="min-w-full divide-y divide-gray-300">
+      <thead class="bg-gray-50">
+        <tr>
+          <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">User</th>
+          <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Contact</th>
+          <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Location</th>
+          <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Status</th>
+          <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Join Date</th>
+          <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Activity</th>
+          <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6">
+            <span class="sr-only">Actions</span>
+          </th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-gray-200 bg-white">
+        <tr *ngFor="let user of paginatedUsers()" class="hover:bg-gray-50">
+          <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6">
+            <div class="flex items-center">
+              <div class="h-10 w-10 flex-shrink-0">
+                <div class="h-10 w-10 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-700 font-bold text-lg">
+                  {{ user.name.charAt(0) }}
+                </div>
+              </div>
+              <div class="ml-4">
+                <a [routerLink]="['/admin/users', user.id]" class="font-medium text-indigo-600 hover:text-indigo-900">{{ user.name }}</a>
+                <div class="text-gray-500">{{ user.email }}</div>
+              </div>
+            </div>
+          </td>
+          <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ user.phone }}</td>
+          <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ user.location }}</td>
+          <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+            <app-status-badge [status]="user.accountStatus"></app-status-badge>
+          </td>
+          <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ user.joinDate }}</td>
+          <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+            <div>{{ user.totalBookings }} bookings</div>
+            <div class="text-xs text-gray-400">€{{ user.totalSpent }} spent</div>
+          </td>
+          <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
+            <button [routerLink]="['/admin/users', user.id]" class="text-indigo-600 hover:text-indigo-900 mr-4">View</button>
+            <div class="inline-block relative group">
+              <button class="text-gray-400 hover:text-gray-600">
+                <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                  <path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z" />
+                </svg>
+              </button>
+              <div class="hidden group-hover:block absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-10">
+                <div class="py-1" role="menu">
+                  <button (click)="suspendUser(user)" class="block w-full text-left px-4 py-2 text-sm text-amber-700 hover:bg-gray-100">Suspend</button>
+                  <button (click)="banUser(user)" class="block w-full text-left px-4 py-2 text-sm text-rose-700 hover:bg-gray-100">Ban</button>
+                  <button (click)="deleteUser(user)" class="block w-full text-left px-4 py-2 text-sm text-rose-700 hover:bg-gray-100">Delete</button>
+                </div>
+              </div>
+            </div>
+          </td>
+        </tr>
+        <tr *ngIf="paginatedUsers().length === 0">
+          <td colspan="7" class="px-6 py-10">
+            <app-empty-state title="No users found" description="Try adjusting your search or filters."></app-empty-state>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  <app-pagination *ngIf="totalItems() > 0" [totalItems]="totalItems()" [pageSize]="itemsPerPage" [currentPage]="currentPage()" (pageChanged)="onPageChange($event)"></app-pagination>
+  
+  <app-confirm-modal [isOpen]="true" *ngIf="modalOpen()" [title]="modalTitle()" [message]="modalMessage()" (confirm)="confirmModal()" (cancel)="closeModal()"></app-confirm-modal>
+</div>\n

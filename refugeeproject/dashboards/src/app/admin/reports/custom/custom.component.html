@@ -1,0 +1,82 @@
+<div class="space-y-6">
+  <app-breadcrumb [items]="[{label: 'Dashboard', route: '/admin'}, {label: 'Reports', route: '/admin/reports'}, {label: 'Custom Report Builder'}]"></app-breadcrumb>
+
+  <h1 class="text-2xl font-bold text-gray-900">Custom Report Builder</h1>
+
+  <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+      <!-- Step 1: Metrics -->
+      <div>
+        <h3 class="text-sm font-semibold text-gray-900 mb-4">1. Select Metrics</h3>
+        <div class="space-y-2">
+          <label class="flex items-center"><input type="checkbox" [(ngModel)]="metrics.users" class="rounded text-indigo-600 focus:ring-indigo-500"><span class="ml-2 text-sm text-gray-700">New Users</span></label>
+          <label class="flex items-center"><input type="checkbox" [(ngModel)]="metrics.providers" class="rounded text-indigo-600 focus:ring-indigo-500"><span class="ml-2 text-sm text-gray-700">Active Providers</span></label>
+          <label class="flex items-center"><input type="checkbox" [(ngModel)]="metrics.bookings" class="rounded text-indigo-600 focus:ring-indigo-500"><span class="ml-2 text-sm text-gray-700">Total Bookings</span></label>
+          <label class="flex items-center"><input type="checkbox" [(ngModel)]="metrics.revenue" class="rounded text-indigo-600 focus:ring-indigo-500"><span class="ml-2 text-sm text-gray-700">Revenue (EUR)</span></label>
+          <label class="flex items-center"><input type="checkbox" [(ngModel)]="metrics.ratings" class="rounded text-indigo-600 focus:ring-indigo-500"><span class="ml-2 text-sm text-gray-700">Avg Ratings</span></label>
+          <label class="flex items-center"><input type="checkbox" [(ngModel)]="metrics.responseTimes" class="rounded text-indigo-600 focus:ring-indigo-500"><span class="ml-2 text-sm text-gray-700">Response Times</span></label>
+        </div>
+      </div>
+
+      <!-- Step 2: Dimensions -->
+      <div>
+        <h3 class="text-sm font-semibold text-gray-900 mb-4">2. Select Dimension</h3>
+        <div class="space-y-2">
+          <label class="flex items-center"><input type="radio" name="dim" value="day" [(ngModel)]="dimension" class="text-indigo-600 focus:ring-indigo-500"><span class="ml-2 text-sm text-gray-700">By Day</span></label>
+          <label class="flex items-center"><input type="radio" name="dim" value="week" [(ngModel)]="dimension" class="text-indigo-600 focus:ring-indigo-500"><span class="ml-2 text-sm text-gray-700">By Week</span></label>
+          <label class="flex items-center"><input type="radio" name="dim" value="month" [(ngModel)]="dimension" class="text-indigo-600 focus:ring-indigo-500"><span class="ml-2 text-sm text-gray-700">By Month</span></label>
+          <label class="flex items-center"><input type="radio" name="dim" value="category" [(ngModel)]="dimension" class="text-indigo-600 focus:ring-indigo-500"><span class="ml-2 text-sm text-gray-700">By Category</span></label>
+          <label class="flex items-center"><input type="radio" name="dim" value="location" [(ngModel)]="dimension" class="text-indigo-600 focus:ring-indigo-500"><span class="ml-2 text-sm text-gray-700">By Location</span></label>
+        </div>
+      </div>
+
+      <!-- Step 3: Date Range -->
+      <div>
+        <h3 class="text-sm font-semibold text-gray-900 mb-4">3. Date Range</h3>
+        <div class="space-y-4">
+          <div>
+            <label class="block text-xs text-gray-500 mb-1">Start Date</label>
+            <input type="date" [(ngModel)]="dateRange.start" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+          </div>
+          <div>
+            <label class="block text-xs text-gray-500 mb-1">End Date</label>
+            <input type="date" [(ngModel)]="dateRange.end" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 4: Visualization -->
+      <div>
+        <h3 class="text-sm font-semibold text-gray-900 mb-4">4. Visualization</h3>
+        <div class="space-y-2">
+          <label class="flex items-center"><input type="radio" name="vis" value="table" [(ngModel)]="visualization" class="text-indigo-600 focus:ring-indigo-500"><span class="ml-2 text-sm text-gray-700">Data Table</span></label>
+          <label class="flex items-center"><input type="radio" name="vis" value="bar" [(ngModel)]="visualization" class="text-indigo-600 focus:ring-indigo-500"><span class="ml-2 text-sm text-gray-700">Bar Chart</span></label>
+          <label class="flex items-center"><input type="radio" name="vis" value="line" [(ngModel)]="visualization" class="text-indigo-600 focus:ring-indigo-500"><span class="ml-2 text-sm text-gray-700">Line Chart</span></label>
+          <label class="flex items-center"><input type="radio" name="vis" value="pie" [(ngModel)]="visualization" class="text-indigo-600 focus:ring-indigo-500"><span class="ml-2 text-sm text-gray-700">Pie Chart</span></label>
+        </div>
+      </div>
+    </div>
+    
+    <div class="mt-8 flex justify-end border-t border-gray-100 pt-6">
+      <button (click)="generateReport()" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700">
+        Generate Report
+      </button>
+    </div>
+  </div>
+
+  <div *ngIf="isGenerated()" class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+    <div class="flex justify-between items-center mb-6">
+      <h2 class="text-lg font-bold text-gray-900">Report Results</h2>
+      <div class="space-x-3">
+        <button (click)="saveReport()" class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">Save Config</button>
+        <button (click)="exportCsv()" class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">Export</button>
+      </div>
+    </div>
+    <div class="h-80 bg-gray-50 border border-dashed border-gray-300 rounded-lg flex items-center justify-center">
+      <div class="text-center">
+        <p class="text-gray-500 font-medium">Visualization: {{visualization | uppercase}}</p>
+        <p class="text-xs text-gray-400 mt-2">Dimension: {{dimension}} | Metrics selected</p>
+      </div>
+    </div>
+  </div>
+</div>

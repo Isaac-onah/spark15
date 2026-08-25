@@ -1,0 +1,58 @@
+<div class="space-y-6">
+  <app-breadcrumb [items]="[{label: 'Dashboard', route: '/admin'}, {label: 'Settings', route: '/admin/settings'}, {label: 'Translations'}]"></app-breadcrumb>
+
+  <div class="border-b border-gray-200">
+    <nav class="-mb-px flex space-x-8">
+      <button *ngFor="let lang of languages" (click)="activeLang.set(lang)"
+        [class.border-indigo-500]="activeLang() === lang" [class.text-indigo-600]="activeLang() === lang"
+        [class.border-transparent]="activeLang() !== lang" [class.text-gray-500]="activeLang() !== lang"
+        class="whitespace-nowrap pb-4 px-1 border-b-2 font-medium text-sm uppercase hover:text-gray-700 hover:border-gray-300">
+        {{lang}}
+      </button>
+    </nav>
+  </div>
+
+  <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+    <table class="min-w-full divide-y divide-gray-200">
+      <thead class="bg-gray-50">
+        <tr>
+          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Key</th>
+          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Default (DE)</th>
+          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Translation ({{activeLang() | uppercase}})</th>
+          <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+        </tr>
+      </thead>
+      <tbody class="bg-white divide-y divide-gray-200">
+        <tr *ngFor="let item of translations()">
+          <td class="px-6 py-4 whitespace-nowrap text-sm font-mono text-gray-500">{{item.key}}</td>
+          <td class="px-6 py-4 text-sm text-gray-900">{{item.de}}</td>
+          <td class="px-6 py-4 text-sm text-gray-900" (dblclick)="editingKey.set(item.key)">
+            <div *ngIf="editingKey() !== item.key">{{ $any(item)[activeLang()] || '' }}</div>
+            <input *ngIf="editingKey() === item.key" type="text" [(ngModel)]="$any(item)[activeLang()]" (blur)="saveTranslation(item.key, $any(item)[activeLang()])" (keyup.enter)="saveTranslation(item.key, $any(item)[activeLang()])" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+          </td>
+          <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+            <button *ngIf="editingKey() !== item.key" (click)="editingKey.set(item.key)" class="text-indigo-600 hover:text-indigo-900">Edit</button>
+            <button *ngIf="editingKey() === item.key" (click)="saveTranslation(item.key, $any(item)[activeLang()])" class="text-emerald-600 hover:text-emerald-900">Save</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+    <h2 class="text-lg font-semibold mb-4 text-gray-900">Auto-Translation Provider</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div>
+        <label class="block text-sm font-medium text-gray-700">Provider</label>
+        <select class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+          <option>DeepL API</option>
+          <option>Google Cloud Translation</option>
+        </select>
+      </div>
+      <div>
+        <label class="block text-sm font-medium text-gray-700">API Key</label>
+        <input type="password" value="************************" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+      </div>
+    </div>
+  </div>
+</div>

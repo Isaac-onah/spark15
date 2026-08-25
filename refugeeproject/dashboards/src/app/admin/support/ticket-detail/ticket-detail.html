@@ -1,0 +1,168 @@
+<div class="space-y-6">
+  <app-breadcrumb [items]="[{label: 'Dashboard', route: '/admin'}, {label: 'Support', route: '/admin/support'}, {label: ticket().subject}]"></app-breadcrumb>
+
+  <!-- Header -->
+  <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+    <div>
+      <h1 class="text-2xl font-bold text-gray-900">{{ ticket().subject }}</h1>
+      <div class="mt-2 text-sm text-gray-500 flex items-center gap-4">
+        <span>ID: {{ ticketId() }}</span>
+        <span>Opened {{ ticket().createdDate | timeAgo }}</span>
+        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
+          {{ ticket().category }}
+        </span>
+      </div>
+    </div>
+    <div class="flex items-center gap-3">
+      <span class="inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium uppercase tracking-wide bg-orange-100 text-orange-800">
+        {{ ticket().priority }} Priority
+      </span>
+      <app-status-badge status="warning" [status]="ticket().status"></app-status-badge>
+    </div>
+  </div>
+
+  <!-- Two Column Layout -->
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+    <!-- Left Column: Thread (2/3) -->
+    <div class="lg:col-span-2 space-y-4">
+      <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden flex flex-col h-[600px]">
+        <!-- Messages Area -->
+        <div class="flex-1 overflow-y-auto p-6 space-y-6 bg-gray-50">
+          <div *ngFor="let msg of ticket().messages" class="flex flex-col">
+            <!-- Internal Note -->
+            <div *ngIf="msg.isInternal" class="max-w-[85%] self-center w-full bg-amber-50 border border-amber-200 rounded-lg p-4 my-2">
+              <div class="flex items-center gap-2 mb-1">
+                <span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-amber-200 text-amber-800 uppercase tracking-wide">Internal Note</span>
+                <span class="text-xs font-medium text-gray-900">{{ msg.sender }}</span>
+                <span class="text-xs text-gray-500">{{ msg.date | timeAgo }}</span>
+              </div>
+              <p class="text-sm text-gray-800 whitespace-pre-wrap">{{ msg.text }}</p>
+            </div>
+            
+            <!-- Standard Message (User or Staff) -->
+            <div *ngIf="!msg.isInternal" class="max-w-[80%] flex flex-col" [ngClass]="msg.isStaff ? 'self-end' : 'self-start'">
+              <div class="flex items-baseline gap-2 mb-1" [ngClass]="msg.isStaff ? 'flex-row-reverse' : 'flex-row'">
+                <span class="text-xs font-bold text-gray-900">{{ msg.sender }}</span>
+                <span *ngIf="msg.isStaff" class="text-[10px] bg-indigo-100 text-indigo-700 px-1.5 rounded">Staff</span>
+                <span class="text-[10px] text-gray-500">{{ msg.date | timeAgo }}</span>
+              </div>
+              <div class="p-4 rounded-2xl text-sm" 
+                   [ngClass]="msg.isStaff ? 'bg-indigo-600 text-white rounded-tr-sm' : 'bg-white border border-gray-200 text-gray-800 rounded-tl-sm shadow-sm'">
+                <p class="whitespace-pre-wrap">{{ msg.text }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Reply Composer -->
+        <div class="p-4 border-t border-gray-200 bg-white">
+          <div class="mb-3 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <input type="checkbox" id="internalNote" [(ngModel)]="isInternal" class="h-4 w-4 text-amber-600 focus:ring-amber-500 border-gray-300 rounded">
+              <label for="internalNote" class="text-sm font-medium text-gray-700 select-none">Add as internal note (hidden from user)</label>
+            </div>
+          </div>
+          <div class="flex gap-3">
+            <div class="flex-grow">
+              <textarea [(ngModel)]="replyText" rows="3" 
+                        class="w-full shadow-sm block sm:text-sm border-gray-300 rounded-lg p-3 border focus:ring-indigo-500 focus:border-indigo-500" 
+                        [ngClass]="isInternal() ? 'bg-amber-50 border-amber-300 focus:ring-amber-500 focus:border-amber-500' : 'bg-white'"
+                        placeholder="Type your reply here..."></textarea>
+            </div>
+            <button (click)="sendReply()" class="self-end inline-flex items-center justify-center px-4 py-3 border border-transparent text-sm font-medium rounded-lg shadow-sm text-white"
+                    [ngClass]="isInternal() ? 'bg-amber-600 hover:bg-amber-700' : 'bg-indigo-600 hover:bg-indigo-700'">
+              <svg class="w-5 h-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+              </svg>
+              Send
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Column: Info & Actions (1/3) -->
+    <div class="lg:col-span-1 space-y-6">
+      <!-- Ticket Info -->
+      <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+        <h2 class="text-base font-bold text-gray-900 mb-4 border-b border-gray-100 pb-2">Ticket Info</h2>
+        <div class="space-y-4">
+          <div>
+            <span class="block text-xs font-medium text-gray-500">Submitted By</span>
+            <div class="flex items-center gap-2 mt-1">
+              <span class="text-sm font-semibold text-gray-900">{{ ticket().user.name }}</span>
+              <span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-medium bg-gray-100 text-gray-800">
+                {{ ticket().user.type }}
+              </span>
+            </div>
+            <a href="mailto:{{ ticket().user.email }}" class="text-xs text-indigo-600 hover:underline mt-1 block">{{ ticket().user.email }}</a>
+          </div>
+          <div>
+            <span class="block text-xs font-medium text-gray-500">Assigned To</span>
+            <span class="text-sm text-gray-900 mt-1 block">{{ ticket().assignedTo }}</span>
+          </div>
+          <div>
+            <span class="block text-xs font-medium text-gray-500">Member Since</span>
+            <span class="text-sm text-gray-900 mt-1 block">{{ ticket().user.memberSince | date:'mediumDate' }}</span>
+          </div>
+        </div>
+        
+        <div class="mt-6 pt-4 border-t border-gray-100 flex flex-col gap-2">
+          <a href="#" class="text-sm text-indigo-600 hover:text-indigo-800 font-medium flex items-center gap-1">
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
+            View User Profile
+          </a>
+          <a href="#" class="text-sm text-indigo-600 hover:text-indigo-800 font-medium flex items-center gap-1">
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
+            View Related Booking
+          </a>
+        </div>
+      </div>
+
+      <!-- Actions -->
+      <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+        <h2 class="text-base font-bold text-gray-900 mb-4 border-b border-gray-100 pb-2">Actions</h2>
+        
+        <div class="space-y-4">
+          <div>
+            <label class="block text-xs font-medium text-gray-700 mb-1">Update Status</label>
+            <select (change)="changeStatus($event)" [value]="ticket().status" class="w-full border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm py-2 px-3 border">
+              <option value="open">Open</option>
+              <option value="in_progress">In Progress</option>
+              <option value="waiting_on_user">Waiting on User</option>
+              <option value="resolved">Resolved</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs font-medium text-gray-700 mb-1">Reassign Ticket</label>
+            <select class="w-full border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm py-2 px-3 border">
+              <option>Admin Sarah</option>
+              <option>Admin Tom</option>
+              <option>Admin Tech</option>
+              <option>Super Admin</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- Canned Responses -->
+      <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+        <h2 class="text-base font-bold text-gray-900 mb-4 border-b border-gray-100 pb-2">Canned Responses</h2>
+        <div class="space-y-2">
+          <button (click)="useCannedResponse('Hello, thank you for reaching out. We are currently looking into this issue and will get back to you shortly.')" 
+                  class="w-full text-left px-3 py-2 text-sm text-gray-700 bg-gray-50 hover:bg-gray-100 border border-gray-200 rounded-lg transition-colors">
+            Acknowledge Receipt
+          </button>
+          <button (click)="useCannedResponse('We need a bit more information to proceed. Could you please provide screenshots or further details?')" 
+                  class="w-full text-left px-3 py-2 text-sm text-gray-700 bg-gray-50 hover:bg-gray-100 border border-gray-200 rounded-lg transition-colors">
+            Request More Info
+          </button>
+          <button (click)="useCannedResponse('This issue has been resolved. If you have any further questions, please let us know.')" 
+                  class="w-full text-left px-3 py-2 text-sm text-gray-700 bg-gray-50 hover:bg-gray-100 border border-gray-200 rounded-lg transition-colors">
+            Mark as Resolved
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

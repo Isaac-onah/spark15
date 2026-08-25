@@ -1,0 +1,122 @@
+<div class="space-y-6">
+  <app-breadcrumb [items]="[{label: 'Dashboard', route: '/admin/dashboard'}, {label: 'Provider Management', route: '/admin/providers'}]"></app-breadcrumb>
+
+  <div class="sm:flex sm:items-center sm:justify-between">
+    <div>
+      <h1 class="text-2xl font-bold text-gray-900">Providers</h1>
+      <p class="mt-2 text-sm text-gray-700">Manage service providers, their verification status, and platform presence.</p>
+    </div>
+    <div class="mt-4 sm:mt-0 flex space-x-3">
+      <button (click)="exportToCsv()" class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+        Export CSV
+      </button>
+    </div>
+  </div>
+
+  <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 flex flex-col md:flex-row gap-4 items-end">
+    <div class="flex-1 w-full">
+      <label class="block text-sm font-medium text-gray-700 mb-1">Search</label>
+      <app-search-input placeholder="Search providers..." (searchChanged)="onSearch($event)"></app-search-input>
+    </div>
+    <div class="w-full md:w-48">
+      <label class="block text-sm font-medium text-gray-700 mb-1">Category</label>
+      <select [(ngModel)]="categoryFilter" (change)="currentPage.set(1)" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md border">
+        <option *ngFor="let cat of categories" [value]="cat">{{ cat === 'all' ? 'All Categories' : cat }}</option>
+      </select>
+    </div>
+    <div class="w-full md:w-48">
+      <label class="block text-sm font-medium text-gray-700 mb-1">Verification</label>
+      <select [(ngModel)]="verificationFilter" (change)="currentPage.set(1)" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md border">
+        <option value="all">All</option>
+        <option value="verified">Verified</option>
+        <option value="pending">Pending</option>
+        <option value="unverified">Unverified</option>
+      </select>
+    </div>
+    <div class="w-full md:w-48">
+      <label class="block text-sm font-medium text-gray-700 mb-1">Status</label>
+      <select [(ngModel)]="statusFilter" (change)="currentPage.set(1)" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md border">
+        <option value="all">All</option>
+        <option value="active">Active</option>
+        <option value="suspended">Suspended</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="bg-white shadow-sm ring-1 ring-black ring-opacity-5 md:rounded-xl overflow-hidden">
+    <table class="min-w-full divide-y divide-gray-300">
+      <thead class="bg-gray-50">
+        <tr>
+          <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Provider</th>
+          <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Category & Services</th>
+          <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Rate / Rating</th>
+          <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Verification</th>
+          <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Featured</th>
+          <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Performance</th>
+          <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-6">
+            <span class="sr-only">Actions</span>
+          </th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-gray-200 bg-white">
+        <tr *ngFor="let provider of paginatedProviders()" class="hover:bg-gray-50">
+          <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6">
+            <div class="flex items-center">
+              <div class="h-10 w-10 flex-shrink-0">
+                <div class="h-10 w-10 rounded-full bg-purple-100 flex items-center justify-center text-purple-700 font-bold text-lg">
+                  {{ provider.name.charAt(0) }}
+                </div>
+              </div>
+              <div class="ml-4">
+                <a [routerLink]="['/admin/providers', provider.id]" class="font-medium text-indigo-600 hover:text-indigo-900">{{ provider.name }}</a>
+                <div class="text-xs text-gray-500 mt-1">
+                  <span *ngFor="let lang of provider.languages; let last = last">{{ lang }}{{ !last ? ', ' : '' }}</span>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="px-3 py-4 text-sm text-gray-500">
+            <div class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800 mb-1">
+              {{ provider.category }}
+            </div>
+            <div class="flex flex-wrap gap-1 mt-1">
+              <span *ngFor="let service of provider.services | slice:0:3" class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-indigo-50 text-indigo-700 border border-indigo-100">
+                {{ service }}
+              </span>
+            </div>
+          </td>
+          <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+            <div class="font-medium text-gray-900">€{{ provider.rate }}/hr</div>
+            <div class="text-amber-500 font-medium">⭐ {{ provider.rating }} <span class="text-gray-400 text-xs">({{ provider.reviews }})</span></div>
+          </td>
+          <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+            <app-status-badge [status]="provider.verification"></app-status-badge>
+            <div class="mt-2"><app-status-badge [status]="provider.status"></app-status-badge></div>
+          </td>
+          <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+            <button type="button" (click)="toggleFeatured(provider.id)" 
+              class="relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+              [ngClass]="provider.featured ? 'bg-indigo-600' : 'bg-gray-200'" role="switch" [attr.aria-checked]="provider.featured">
+              <span class="pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out"
+                [ngClass]="provider.featured ? 'translate-x-5' : 'translate-x-0'"></span>
+            </button>
+          </td>
+          <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+            <div>{{ provider.totalBookings }} bookings</div>
+            <div class="text-xs text-green-600 font-medium">€{{ provider.totalEarned }} earned</div>
+          </td>
+          <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
+            <button [routerLink]="['/admin/providers', provider.id]" class="text-indigo-600 hover:text-indigo-900 mr-4">View</button>
+          </td>
+        </tr>
+        <tr *ngIf="paginatedProviders().length === 0">
+          <td colspan="7" class="px-6 py-10">
+            <app-empty-state title="No providers found" description="Try adjusting your search or filters."></app-empty-state>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  <app-pagination *ngIf="totalItems() > 0" [totalItems]="totalItems()" [pageSize]="itemsPerPage" [currentPage]="currentPage()" (pageChanged)="onPageChange($event)"></app-pagination>
+</div>\n

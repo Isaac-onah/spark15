@@ -1,0 +1,39 @@
+<div class="space-y-6">
+  <app-breadcrumb [items]="[{label: 'Dashboard', route: '/admin'}, {label: 'Legal', route: '/admin/legal'}, {label: 'Content Policy'}]"></app-breadcrumb>
+
+  <div class="flex justify-between items-center">
+    <div>
+      <h1 class="text-2xl font-bold text-gray-900">Content Policy</h1>
+      <p class="text-sm text-gray-500 mt-1">Last updated {{lastUpdated}} by {{updatedBy}}</p>
+    </div>
+    <div class="space-x-3">
+      <button (click)="savePolicy()" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700">Save Changes</button>
+    </div>
+  </div>
+
+  <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden flex flex-col">
+    <div class="border-b border-gray-200 bg-gray-50 p-2 flex space-x-2">
+      <button class="p-2 hover:bg-gray-200 rounded text-gray-700 font-bold">B</button>
+      <button class="p-2 hover:bg-gray-200 rounded text-gray-700 italic">I</button>
+      <button class="p-2 hover:bg-gray-200 rounded text-gray-700 underline">U</button>
+    </div>
+    <textarea [(ngModel)]="content" class="flex-1 w-full p-6 min-h-[300px] border-none resize-none focus:ring-0 font-mono text-sm text-gray-800"></textarea>
+  </div>
+
+  <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+    <h2 class="text-lg font-semibold text-gray-900 mb-4">Prohibited Words Filter</h2>
+    <p class="text-sm text-gray-500 mb-4">Messages or reviews containing these words will be automatically flagged for manual review.</p>
+    
+    <div class="flex flex-wrap gap-2 mb-4">
+      <span *ngFor="let word of prohibitedWords()" class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-rose-100 text-rose-800">
+        {{word}}
+        <button (click)="removeWord(word)" class="ml-2 text-rose-600 hover:text-rose-900 focus:outline-none">&times;</button>
+      </span>
+    </div>
+    
+    <div class="flex max-w-sm">
+      <input type="text" [(ngModel)]="newWord" (keyup.enter)="addWord()" placeholder="Add a word..." class="flex-1 rounded-l-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+      <button (click)="addWord()" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-r-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700">Add</button>
+    </div>
+  </div>
+</div>

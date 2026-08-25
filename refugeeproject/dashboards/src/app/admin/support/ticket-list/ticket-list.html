@@ -1,0 +1,90 @@
+<div class="space-y-6">
+  <app-breadcrumb [items]="[{label: 'Dashboard', route: '/admin'}, {label: 'Support Tickets'}]"></app-breadcrumb>
+
+  <!-- Stats Row -->
+  <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+    <app-stat-card title="Open" [value]="stats().open" icon="inbox" valueColor="text-rose-600"></app-stat-card>
+    <app-stat-card title="In Progress" [value]="stats().inProgress" icon="refresh" valueColor="text-amber-600"></app-stat-card>
+    <app-stat-card title="Waiting on User" [value]="stats().waitingOnUser" icon="clock" valueColor="text-blue-600"></app-stat-card>
+    <app-stat-card title="Resolved" [value]="stats().resolved" icon="check" valueColor="text-emerald-600"></app-stat-card>
+  </div>
+
+  <!-- Filters & Search -->
+  <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+    <div class="flex space-x-2 bg-gray-100 p-1 rounded-lg">
+      <button (click)="statusFilter.set('all')" [class]="statusFilter() === 'all' ? 'bg-white shadow-sm text-gray-900' : 'text-gray-600'" class="px-4 py-2 text-sm font-medium rounded-md">All</button>
+      <button (click)="statusFilter.set('open')" [class]="statusFilter() === 'open' ? 'bg-white shadow-sm text-rose-600' : 'text-gray-600'" class="px-4 py-2 text-sm font-medium rounded-md">Open</button>
+      <button (click)="statusFilter.set('in_progress')" [class]="statusFilter() === 'in_progress' ? 'bg-white shadow-sm text-amber-600' : 'text-gray-600'" class="px-4 py-2 text-sm font-medium rounded-md">In Progress</button>
+      <button (click)="statusFilter.set('waiting')" [class]="statusFilter() === 'waiting' ? 'bg-white shadow-sm text-blue-600' : 'text-gray-600'" class="px-4 py-2 text-sm font-medium rounded-md">Waiting</button>
+      <button (click)="statusFilter.set('resolved')" [class]="statusFilter() === 'resolved' ? 'bg-white shadow-sm text-emerald-600' : 'text-gray-600'" class="px-4 py-2 text-sm font-medium rounded-md">Resolved</button>
+    </div>
+    
+    <div class="w-full sm:w-64">
+      <input type="text" [(ngModel)]="searchQuery" placeholder="Search tickets..." class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+    </div>
+  </div>
+
+  <!-- Table -->
+  <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+    <div class="overflow-x-auto">
+      <table class="w-full whitespace-nowrap text-left">
+        <thead class="bg-gray-50 border-b border-gray-200 text-xs font-semibold text-gray-500 uppercase tracking-wider">
+          <tr>
+            <th class="px-6 py-4">ID / Subject</th>
+            <th class="px-6 py-4">Submitted By</th>
+            <th class="px-6 py-4">Category / Priority</th>
+            <th class="px-6 py-4">Status</th>
+            <th class="px-6 py-4">Assigned To</th>
+            <th class="px-6 py-4">Updated</th>
+            <th class="px-6 py-4 text-right">Actions</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-100 text-sm">
+          <tr *ngFor="let ticket of tickets()" class="hover:bg-gray-50">
+            <td class="px-6 py-4">
+              <div class="flex flex-col">
+                <a [routerLink]="['/admin/support', ticket.id]" class="font-medium text-indigo-600 hover:text-indigo-900 max-w-[200px] truncate" [title]="ticket.subject">{{ ticket.subject }}</a>
+                <span class="text-xs text-gray-500">{{ ticket.id }}</span>
+              </div>
+            </td>
+            <td class="px-6 py-4">
+              <div class="flex flex-col items-start gap-1">
+                <span class="text-gray-900">{{ ticket.submittedBy }}</span>
+                <span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-medium bg-gray-100 text-gray-800">
+                  {{ ticket.userType }}
+                </span>
+              </div>
+            </td>
+            <td class="px-6 py-4">
+              <div class="flex flex-col items-start gap-1">
+                <span class="text-xs text-gray-600">{{ ticket.category }}</span>
+                <span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-medium uppercase tracking-wide" [ngClass]="getPriorityColor(ticket.priority)">
+                  {{ ticket.priority }}
+                </span>
+              </div>
+            </td>
+            <td class="px-6 py-4">
+              <app-status-badge 
+                [status]="ticket.status === 'open' ? 'error' : (ticket.status === 'in_progress' ? 'warning' : (ticket.status === 'resolved' ? 'active' : 'pending'))" 
+                [status]="ticket.status">
+              </app-status-badge>
+            </td>
+            <td class="px-6 py-4 text-gray-700">
+              {{ ticket.assignedTo || '-' }}
+            </td>
+            <td class="px-6 py-4 text-gray-500 text-xs">
+              {{ ticket.lastUpdated | timeAgo }}
+            </td>
+            <td class="px-6 py-4 text-right">
+              <a [routerLink]="['/admin/support', ticket.id]" class="text-indigo-600 hover:text-indigo-900 font-medium">View</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    
+    <div class="px-6 py-4 border-t border-gray-100 bg-gray-50">
+      <app-pagination [currentPage]="currentPage()" [totalItems]="50" (pageChanged)="onPageChange($event)"></app-pagination>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,183 @@
+<div class="space-y-6">
+  <app-breadcrumb [items]="breadcrumbs"></app-breadcrumb>
+
+  <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+    <h1 class="text-2xl font-bold text-gray-900">Provider Verification Queue</h1>
+    <span class="px-3 py-1 bg-amber-100 text-amber-800 rounded-full text-sm font-medium">
+      {{ requests().length }} Pending
+    </span>
+  </div>
+
+  <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+    <div class="border-b border-gray-100">
+      <nav class="flex space-x-8 px-6" aria-label="Tabs">
+        <button *ngFor="let tab of ['all', 'pending', 'under_review', 'more_info']"
+                (click)="setFilter(tab)"
+                [class]="filterStatus() === tab ? 'border-indigo-500 text-indigo-600' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'"
+                class="whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm capitalize">
+          {{ tab.replace('_', ' ') }}
+        </button>
+      </nav>
+    </div>
+
+    <div class="overflow-x-auto">
+      <table class="min-w-full divide-y divide-gray-200">
+        <thead class="bg-gray-50">
+          <tr>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Provider</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Category</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Submitted</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Documents</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Reviewer</th>
+            <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+          </tr>
+        </thead>
+        <tbody class="bg-white divide-y divide-gray-200">
+          <tr *ngFor="let req of filteredRequests()">
+            <td class="px-6 py-4 whitespace-nowrap">
+              <div class="text-sm font-medium text-gray-900">{{ req.name }}</div>
+              <div class="text-sm text-gray-500">{{ req.email }}</div>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+              {{ req.category }}
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+              {{ req.submittedAt | timeAgo }}
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+              <div class="flex gap-2">
+                <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-gray-100 text-gray-800 cursor-pointer hover:bg-gray-200" (click)="viewRequest(req)">
+                  ID Photo
+                </span>
+                <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-gray-100 text-gray-800 cursor-pointer hover:bg-gray-200" (click)="viewRequest(req)">
+                  Card
+                </span>
+              </div>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap">
+              <app-status-badge [status]="req.status"></app-status-badge>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+              {{ req.reviewer }}
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+              <button class="text-indigo-600 hover:text-indigo-900" (click)="viewRequest(req)">Review</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="isDocumentViewerOpen()" class="fixed inset-0 z-50 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+  <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+    <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" (click)="closeViewer()"></div>
+    <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+    <div class="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-4xl sm:w-full sm:p-6">
+      
+      <div *ngIf="selectedRequest() as req" class="space-y-6">
+        <div class="flex justify-between items-start">
+          <div>
+            <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-title">
+              Review: {{ req.name }}
+            </h3>
+            <p class="mt-1 text-sm text-gray-500">{{ req.category }} &middot; {{ req.email }}</p>
+          </div>
+          <button type="button" class="bg-white rounded-md text-gray-400 hover:text-gray-500" (click)="closeViewer()">
+            <span class="sr-only">Close</span>
+            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="space-y-4">
+            <h4 class="font-medium text-gray-900">Documents</h4>
+            <div class="space-y-4">
+              <div>
+                <p class="text-sm font-medium text-gray-500 mb-1">ID Photo</p>
+                <div class="w-full h-48 bg-gray-200 rounded-lg flex items-center justify-center text-gray-500 border-2 border-dashed border-gray-300">
+                  Placeholder for {{ req.docs.id }}
+                </div>
+              </div>
+              <div>
+                <p class="text-sm font-medium text-gray-500 mb-1">Membership Card</p>
+                <div class="w-full h-48 bg-gray-200 rounded-lg flex items-center justify-center text-gray-500 border-2 border-dashed border-gray-300">
+                  Placeholder for {{ req.docs.card }}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-6">
+            <div>
+              <h4 class="font-medium text-gray-900 mb-4">Verification Checklist</h4>
+              <div class="space-y-3">
+                <div *ngFor="let item of checklist()" class="flex items-start">
+                  <div class="flex items-center h-5">
+                    <input type="checkbox" [(ngModel)]="item.checked" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded">
+                  </div>
+                  <div class="ml-3 text-sm">
+                    <label class="font-medium text-gray-700">{{ item.label }}</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">Review Notes</label>
+              <textarea [(ngModel)]="reviewNotes" rows="3" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md p-2 border"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-5 sm:mt-6 sm:flex sm:flex-row-reverse gap-3">
+          <button type="button" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-emerald-600 text-base font-medium text-white hover:bg-emerald-700 sm:w-auto sm:text-sm" (click)="approve()">
+            Approve
+          </button>
+          <button type="button" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-rose-600 text-base font-medium text-white hover:bg-rose-700 sm:w-auto sm:text-sm" (click)="openReject()">
+            Reject
+          </button>
+          <button type="button" class="w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 sm:w-auto sm:text-sm" (click)="requestMoreInfo()">
+            Request More Info
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="isRejectModalOpen()" class="fixed inset-0 z-[60] overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+  <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+    <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" (click)="closeReject()"></div>
+    <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+    <div class="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:p-6">
+      
+      <div>
+        <h3 class="text-lg leading-6 font-medium text-gray-900">Provide Rejection Reason</h3>
+        <div class="mt-4">
+          <select [(ngModel)]="rejectionReason" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md border mb-4">
+            <option value="">Select a common reason...</option>
+            <option value="ID expired">ID expired</option>
+            <option value="Photo blurry">Photo blurry/unreadable</option>
+            <option value="Fraud suspected">Suspicious documentation</option>
+            <option value="custom">Other (specify below)</option>
+          </select>
+          <textarea rows="3" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md border p-2" placeholder="Custom reason..."></textarea>
+        </div>
+      </div>
+
+      <div class="mt-5 sm:mt-6 sm:flex sm:flex-row-reverse gap-3">
+        <button type="button" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-rose-600 text-base font-medium text-white hover:bg-rose-700 sm:w-auto sm:text-sm" (click)="reject()">
+          Confirm Rejection
+        </button>
+        <button type="button" class="w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 sm:w-auto sm:text-sm" (click)="closeReject()">
+          Cancel
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,84 @@
+<div class="space-y-6">
+  <!-- Header -->
+  <div>
+    <h1 class="text-2xl font-bold text-gray-900 tracking-tight">Settings</h1>
+    <p class="text-sm text-gray-500 mt-1">Manage your account preferences and system configuration.</p>
+  </div>
+
+  <div class="bg-white rounded-xl shadow-sm border border-gray-100 flex flex-col md:flex-row overflow-hidden min-h-[600px]">
+    <!-- Settings Sidebar -->
+    <div class="w-full md:w-64 border-b md:border-b-0 md:border-r border-gray-100 bg-gray-50/50 p-4">
+      <nav class="space-y-1">
+        <a href="javascript:void(0)" (click)="activeTab = 'profile'" [class.bg-white]="activeTab === 'profile'" [class.shadow-sm]="activeTab === 'profile'" [class.text-indigo-600]="activeTab === 'profile'" [class.text-gray-600]="activeTab !== 'profile'" class="flex items-center px-3 py-2.5 rounded-lg text-sm font-medium transition-all">
+          <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+          Profile
+        </a>
+        <a href="javascript:void(0)" (click)="activeTab = 'notifications'" [class.bg-white]="activeTab === 'notifications'" [class.shadow-sm]="activeTab === 'notifications'" [class.text-indigo-600]="activeTab === 'notifications'" [class.text-gray-600]="activeTab !== 'notifications'" class="flex items-center px-3 py-2.5 rounded-lg text-sm font-medium transition-all hover:bg-white/50">
+          <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg>
+          Notifications
+        </a>
+        <a href="javascript:void(0)" (click)="activeTab = 'security'" [class.bg-white]="activeTab === 'security'" [class.shadow-sm]="activeTab === 'security'" [class.text-indigo-600]="activeTab === 'security'" [class.text-gray-600]="activeTab !== 'security'" class="flex items-center px-3 py-2.5 rounded-lg text-sm font-medium transition-all hover:bg-white/50">
+          <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+          Security
+        </a>
+      </nav>
+    </div>
+
+    <!-- Settings Content -->
+    <div class="flex-1 p-6 lg:p-8">
+      
+      <!-- Profile Tab -->
+      <div *ngIf="activeTab === 'profile'" class="max-w-2xl">
+        <h2 class="text-lg font-semibold text-gray-900 mb-6">Profile Settings</h2>
+        
+        <div class="flex items-center mb-8">
+          <div class="h-20 w-20 rounded-full bg-gradient-to-tr from-indigo-100 to-purple-100 flex items-center justify-center text-indigo-700 font-bold text-2xl shadow-sm border border-indigo-50">
+            {{ (profileData.firstName.charAt(0) + profileData.lastName.charAt(0)) || 'U' }}
+          </div>
+          <div class="ml-5">
+            <button class="bg-white border border-gray-300 text-gray-700 px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-50 transition-colors shadow-sm">
+              Change Avatar
+            </button>
+            <p class="text-xs text-gray-500 mt-2">JPG, GIF or PNG. Max size of 800K</p>
+          </div>
+        </div>
+
+        <form (ngSubmit)="saveProfile()" #profileForm="ngForm" class="space-y-6">
+          <div class="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-2">
+            <div>
+              <label class="block text-sm font-medium text-gray-700">First name <span class="text-red-500">*</span></label>
+              <input type="text" [(ngModel)]="profileData.firstName" name="firstName" required #firstName="ngModel" 
+                [ngClass]="{'border-red-300 focus:ring-red-500 focus:border-red-500': firstName.invalid && profileForm.submitted}"
+                class="mt-1 block w-full border border-gray-300 rounded-lg shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm transition-colors">
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700">Last name</label>
+              <input type="text" [(ngModel)]="profileData.lastName" name="lastName" 
+                class="mt-1 block w-full border border-gray-300 rounded-lg shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm transition-colors">
+            </div>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Email</label>
+            <input type="email" [value]="profileData.email" disabled class="mt-1 block w-full bg-gray-50 border border-gray-200 text-gray-500 rounded-lg shadow-sm py-2 px-3 sm:text-sm cursor-not-allowed">
+            <p class="mt-1 text-xs text-gray-500">Contact admin to change your email address.</p>
+          </div>
+        
+          <div class="mt-8 border-t border-gray-100 pt-6 flex justify-start">
+            <button type="submit" [disabled]="isSaving()" class="flex items-center bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors shadow-sm disabled:opacity-70 disabled:cursor-not-allowed">
+              <svg *ngIf="isSaving()" class="animate-spin -ml-1 mr-2 h-4 w-4 text-white" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+              {{ isSaving() ? 'Saving Changes...' : 'Save Profile' }}
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Other Tabs Placeholder -->
+      <div *ngIf="activeTab !== 'profile'" class="h-full flex flex-col items-center justify-center text-gray-400">
+        <svg class="w-16 h-16 mb-4 text-gray-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+        <p class="text-lg font-medium text-gray-500 capitalize">{{ activeTab }} Settings</p>
+        <p class="text-sm mt-1 text-center max-w-md">Configuration options for this section will be available in the next release.</p>
+      </div>
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,40 @@
+<div class="space-y-6">
+  <app-breadcrumb [items]="[{label: 'Dashboard', route: '/admin'}, {label: 'Settings', route: '/admin/settings'}, {label: 'Feature Flags'}]"></app-breadcrumb>
+
+  <div class="bg-amber-50 border-l-4 border-amber-400 p-4">
+    <div class="flex">
+      <div class="flex-shrink-0">
+        <svg class="h-5 w-5 text-amber-400" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+        </svg>
+      </div>
+      <div class="ml-3">
+        <p class="text-sm text-amber-700">
+          Warning: Changes to feature flags take effect immediately across the platform and may impact active users.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="space-y-4">
+    <div *ngFor="let flag of flags()" [class.border-rose-300]="flag.isWarning" [class.bg-rose-50]="flag.isWarning && flag.enabled" class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 flex items-center justify-between">
+      <div class="pr-8">
+        <h3 class="text-lg font-medium" [class.text-rose-700]="flag.isWarning" [class.text-gray-900]="!flag.isWarning">
+          {{flag.label}} <span class="text-xs text-gray-500 font-mono ml-2">{{flag.key}}</span>
+        </h3>
+        <p class="text-sm text-gray-500 mt-1">{{flag.description}}</p>
+        <p class="text-xs text-gray-400 mt-2">Last updated {{flag.lastUpdated}} by {{flag.by}}</p>
+      </div>
+      <div>
+        <button type="button" (click)="toggleFlag(flag)"
+          [class.bg-emerald-500]="flag.enabled && !flag.isWarning" 
+          [class.bg-rose-600]="flag.enabled && flag.isWarning"
+          [class.bg-gray-200]="!flag.enabled"
+          class="relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none">
+          <span aria-hidden="true" [class.translate-x-5]="flag.enabled" [class.translate-x-0]="!flag.enabled"
+            class="pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out"></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

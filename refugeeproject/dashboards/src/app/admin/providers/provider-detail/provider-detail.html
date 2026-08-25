@@ -1,0 +1,270 @@
+<div class="space-y-6">
+  <app-breadcrumb [items]="[{label: 'Dashboard', route: '/admin/dashboard'}, {label: 'Providers', route: '/admin/providers'}, {label: provider().name, route: ''}]"></app-breadcrumb>
+
+  <!-- Profile Header Card -->
+  <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+    <div class="p-6 sm:p-8">
+      <div class="sm:flex sm:items-center sm:justify-between">
+        <div class="sm:flex sm:space-x-5">
+          <div class="flex-shrink-0">
+            <div class="mx-auto h-24 w-24 rounded-full bg-purple-100 flex items-center justify-center text-purple-700 font-bold text-4xl">
+              {{ provider().name.charAt(0) }}
+            </div>
+          </div>
+          <div class="mt-4 text-center sm:mt-0 sm:pt-1 sm:text-left">
+            <div class="flex items-center justify-center sm:justify-start gap-2 mb-1">
+              <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
+                {{ provider().category }}
+              </span>
+              <app-status-badge [status]="provider().verification"></app-status-badge>
+              <app-status-badge [status]="provider().status"></app-status-badge>
+            </div>
+            <p class="text-xl font-bold text-gray-900 sm:text-2xl">{{ provider().name }}</p>
+            <div class="mt-1 flex flex-col sm:flex-row sm:flex-wrap sm:space-x-6">
+              <div class="mt-2 flex items-center text-sm font-medium text-amber-500">
+                ⭐ {{ provider().rating }} <span class="text-gray-500 ml-1 font-normal">({{ provider().reviews }} reviews)</span>
+              </div>
+              <div class="mt-2 flex items-center text-sm font-medium text-gray-900">
+                €{{ provider().rate }}<span class="text-gray-500 font-normal">/hr</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="mt-5 flex justify-center sm:mt-0 space-x-3 flex-col sm:flex-row gap-3 sm:gap-0">
+          <button type="button" class="inline-flex items-center justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50">
+            Edit
+          </button>
+          <button *ngIf="provider().verification !== 'verified'" type="button" class="inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700">
+            Verify Provider
+          </button>
+          <button type="button" class="inline-flex items-center justify-center rounded-md border border-transparent bg-rose-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-rose-700">
+            Suspend
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tab Navigation -->
+  <div class="border-b border-gray-200">
+    <nav class="-mb-px flex space-x-6 sm:space-x-8 overflow-x-auto" aria-label="Tabs">
+      <button (click)="setTab('overview')" [class.border-indigo-500]="activeTab() === 'overview'" [class.text-indigo-600]="activeTab() === 'overview'" [class.border-transparent]="activeTab() !== 'overview'" [class.text-gray-500]="activeTab() !== 'overview'" class="whitespace-nowrap border-b-2 py-4 px-1 text-sm font-medium hover:border-gray-300 hover:text-gray-700">
+        Overview
+      </button>
+      <button (click)="setTab('bookings')" [class.border-indigo-500]="activeTab() === 'bookings'" [class.text-indigo-600]="activeTab() === 'bookings'" [class.border-transparent]="activeTab() !== 'bookings'" [class.text-gray-500]="activeTab() !== 'bookings'" class="whitespace-nowrap border-b-2 py-4 px-1 text-sm font-medium hover:border-gray-300 hover:text-gray-700">
+        Bookings
+      </button>
+      <button (click)="setTab('reviews')" [class.border-indigo-500]="activeTab() === 'reviews'" [class.text-indigo-600]="activeTab() === 'reviews'" [class.border-transparent]="activeTab() !== 'reviews'" [class.text-gray-500]="activeTab() !== 'reviews'" class="whitespace-nowrap border-b-2 py-4 px-1 text-sm font-medium hover:border-gray-300 hover:text-gray-700">
+        Reviews
+      </button>
+      <button (click)="setTab('earnings')" [class.border-indigo-500]="activeTab() === 'earnings'" [class.text-indigo-600]="activeTab() === 'earnings'" [class.border-transparent]="activeTab() !== 'earnings'" [class.text-gray-500]="activeTab() !== 'earnings'" class="whitespace-nowrap border-b-2 py-4 px-1 text-sm font-medium hover:border-gray-300 hover:text-gray-700">
+        Earnings
+      </button>
+      <button (click)="setTab('documents')" [class.border-indigo-500]="activeTab() === 'documents'" [class.text-indigo-600]="activeTab() === 'documents'" [class.border-transparent]="activeTab() !== 'documents'" [class.text-gray-500]="activeTab() !== 'documents'" class="whitespace-nowrap border-b-2 py-4 px-1 text-sm font-medium hover:border-gray-300 hover:text-gray-700">
+        Documents
+      </button>
+    </nav>
+  </div>
+
+  <!-- Tab Content -->
+  <div [ngSwitch]="activeTab()">
+    <!-- Overview Tab -->
+    <div *ngSwitchCase="'overview'" class="grid grid-cols-1 gap-6 lg:grid-cols-3">
+      <div class="lg:col-span-2 space-y-6">
+        <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+          <h3 class="text-lg font-medium leading-6 text-gray-900 mb-4">About Provider</h3>
+          <p class="text-sm text-gray-700 mb-6">{{ provider().bio }}</p>
+          
+          <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+            <div>
+              <h4 class="text-sm font-medium text-gray-900 mb-2">Services Offered</h4>
+              <ul class="space-y-1">
+                <li *ngFor="let service of provider().services" class="text-sm text-gray-600 flex items-center">
+                  <svg class="h-4 w-4 text-indigo-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                  {{ service }}
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="text-sm font-medium text-gray-900 mb-2">Languages</h4>
+              <ul class="space-y-1">
+                <li *ngFor="let lang of provider().languages" class="text-sm text-gray-600 flex items-center">
+                  <svg class="h-4 w-4 text-gray-400 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" />
+                  </svg>
+                  {{ lang }}
+                </li>
+              </ul>
+            </div>
+          </div>
+          
+          <div class="mt-6 border-t border-gray-100 pt-6">
+            <h4 class="text-sm font-medium text-gray-900 mb-2">Availability</h4>
+            <p class="text-sm text-gray-600">{{ provider().availability }}</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="space-y-6">
+        <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+          <h3 class="text-lg font-medium leading-6 text-gray-900 mb-4">Performance Metrics</h3>
+          <dl class="space-y-4">
+            <div class="flex justify-between">
+              <dt class="text-sm font-medium text-gray-500">Completion Rate</dt>
+              <dd class="text-sm text-gray-900 font-semibold">{{ provider().completionRate }}%</dd>
+            </div>
+            <div class="flex justify-between">
+              <dt class="text-sm font-medium text-gray-500">Avg. Response Time</dt>
+              <dd class="text-sm text-gray-900">{{ provider().avgResponseTime }}</dd>
+            </div>
+            <div class="flex justify-between">
+              <dt class="text-sm font-medium text-gray-500">Total Bookings</dt>
+              <dd class="text-sm text-gray-900 font-semibold">{{ provider().totalBookings }}</dd>
+            </div>
+            <div class="flex justify-between">
+              <dt class="text-sm font-medium text-gray-500">Total Earned</dt>
+              <dd class="text-sm text-green-600 font-semibold">€{{ provider().totalEarned }}</dd>
+            </div>
+          </dl>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bookings Tab -->
+    <div *ngSwitchCase="'bookings'" class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+      <div class="px-4 py-5 sm:px-6 flex justify-between items-center">
+        <h3 class="text-lg font-medium leading-6 text-gray-900">Provider Bookings</h3>
+      </div>
+      <div class="overflow-x-auto border-t border-gray-200">
+        <table class="min-w-full divide-y divide-gray-200">
+          <thead class="bg-gray-50">
+            <tr>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Client</th>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Service</th>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Amount</th>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+            </tr>
+          </thead>
+          <tbody class="bg-white divide-y divide-gray-200">
+            <tr *ngFor="let booking of bookings()">
+              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-indigo-600">{{ booking.id }}</td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ booking.client }}</td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ booking.service }}</td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ booking.date }}</td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">€{{ booking.amount }}</td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                <app-status-badge [status]="booking.status"></app-status-badge>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Reviews Tab -->
+    <div *ngSwitchCase="'reviews'" class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+      <ul role="list" class="divide-y divide-gray-200">
+        <li *ngFor="let review of reviewsList()" class="p-6">
+          <div class="flex space-x-3">
+            <div class="flex-shrink-0">
+              <div class="h-10 w-10 rounded-full bg-gray-200 flex items-center justify-center text-gray-600 font-bold">
+                {{ review.reviewer.charAt(0) }}
+              </div>
+            </div>
+            <div class="flex-1">
+              <div class="flex items-center justify-between">
+                <h3 class="text-sm font-medium text-gray-900">{{ review.reviewer }}</h3>
+                <p class="text-sm text-gray-500">{{ review.date }}</p>
+              </div>
+              <div class="flex items-center mt-1">
+                <span class="text-amber-400 text-sm">
+                  <ng-container *ngFor="let i of [1,2,3,4,5]">
+                    <span *ngIf="i <= review.rating">★</span>
+                    <span *ngIf="i > review.rating" class="text-gray-300">★</span>
+                  </ng-container>
+                </span>
+              </div>
+              <p class="mt-2 text-sm text-gray-700">{{ review.comment }}</p>
+            </div>
+            <div class="flex-shrink-0 self-start flex space-x-2">
+              <button type="button" class="text-gray-400 hover:text-gray-500">
+                <span class="sr-only">Flag</span>
+                <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 21v-4m0 0V5a2 2 0 012-2h6.5l1 1H21l-3 6 3 6h-8.5l-1-1H5a2 2 0 00-2 2zm9-13.5V9" />
+                </svg>
+              </button>
+              <button type="button" class="text-rose-400 hover:text-rose-500">
+                <span class="sr-only">Remove</span>
+                <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+    
+    <!-- Earnings Tab -->
+    <div *ngSwitchCase="'earnings'" class="space-y-6">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+          <p class="text-sm font-medium text-gray-500">Total Earned</p>
+          <p class="mt-2 text-3xl font-bold text-gray-900">€{{ provider().totalEarned }}</p>
+        </div>
+        <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+          <p class="text-sm font-medium text-gray-500">Pending Payouts</p>
+          <p class="mt-2 text-3xl font-bold text-gray-900">€240</p>
+        </div>
+        <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+          <p class="text-sm font-medium text-gray-500">Earned This Month</p>
+          <p class="mt-2 text-3xl font-bold text-gray-900">€850</p>
+        </div>
+      </div>
+      
+      <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+        <div class="px-4 py-5 sm:px-6">
+          <h3 class="text-lg font-medium leading-6 text-gray-900">Earnings History</h3>
+        </div>
+        <div class="flex items-center justify-center p-12 bg-gray-50 border-t border-gray-200">
+          <p class="text-gray-500">Earnings table placeholder</p>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Documents Tab -->
+    <div *ngSwitchCase="'documents'" class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+      <h3 class="text-lg font-medium leading-6 text-gray-900 mb-6">Verification Documents</h3>
+      
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <div class="border border-gray-200 rounded-lg p-4">
+          <div class="flex items-center justify-between mb-4">
+            <h4 class="text-sm font-medium text-gray-900">ID / Passport</h4>
+            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">Verified</span>
+          </div>
+          <div class="aspect-w-3 aspect-h-2 bg-gray-100 rounded-md flex items-center justify-center">
+            <svg class="h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 21h7a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v11m0 5l4.879-4.879m0 0a3 3 0 104.243-4.242 3 3 0 00-4.243 4.242z" />
+            </svg>
+          </div>
+        </div>
+        
+        <div class="border border-gray-200 rounded-lg p-4">
+          <div class="flex items-center justify-between mb-4">
+            <h4 class="text-sm font-medium text-gray-900">Professional Certificate</h4>
+            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">Verified</span>
+          </div>
+          <div class="aspect-w-3 aspect-h-2 bg-gray-100 rounded-md flex items-center justify-center">
+            <svg class="h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 21h7a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v11m0 5l4.879-4.879m0 0a3 3 0 104.243-4.242 3 3 0 00-4.243 4.242z" />
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>\n

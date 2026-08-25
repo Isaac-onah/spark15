@@ -1,0 +1,68 @@
+<div class="space-y-6">
+  <app-breadcrumb [items]="breadcrumbs"></app-breadcrumb>
+
+  <div class="flex justify-between items-center">
+    <h1 class="text-2xl font-bold text-gray-900">Financial Overview</h1>
+    <button class="px-4 py-2 bg-indigo-600 text-white text-sm font-medium rounded-lg hover:bg-indigo-700">
+      Download Report
+    </button>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <app-stat-card title="Total Escrow Balance" [value]="stats().totalEscrow | currencyEur" icon="euro" trendDirection="up" trend="+5.2%"></app-stat-card>
+    <app-stat-card title="Total Revenue (GMV)" [value]="stats().totalRevenue | currencyEur" icon="chart" trendDirection="up" trend="+12.5%"></app-stat-card>
+    <app-stat-card title="Platform Fees Collected" [value]="stats().platformFees | currencyEur" icon="bank" trendDirection="up" trend="+8.1%"></app-stat-card>
+    <app-stat-card title="Pending Payouts" [value]="stats().pendingPayouts | currencyEur" icon="clock" trendDirection="neutral" trend="0%"></app-stat-card>
+    <app-stat-card title="Total Refunds" [value]="stats().totalRefunds | currencyEur" icon="refresh" trendDirection="down" trend="-2.4%"></app-stat-card>
+    <app-stat-card title="Net Revenue" [value]="stats().netRevenue | currencyEur" icon="check" trendDirection="up" trend="+15.3%"></app-stat-card>
+  </div>
+
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 h-96 flex flex-col">
+      <h2 class="text-lg font-bold text-gray-900 mb-4">Revenue Over Time</h2>
+      <div class="flex-1 bg-gray-50 border border-dashed border-gray-300 rounded-lg flex items-center justify-center text-gray-400">
+        Line Chart Placeholder
+      </div>
+    </div>
+    
+    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 h-96 flex flex-col">
+      <h2 class="text-lg font-bold text-gray-900 mb-4">Escrow Flow</h2>
+      <div class="flex-1 bg-gray-50 border border-dashed border-gray-300 rounded-lg flex items-center justify-center text-gray-400">
+        Sankey Diagram Placeholder
+      </div>
+    </div>
+  </div>
+
+  <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+    <div class="px-6 py-4 border-b border-gray-100 flex justify-between items-center">
+      <h2 class="text-lg font-bold text-gray-900">Recent Transactions</h2>
+      <a href="/admin/financials/ledger" class="text-sm font-medium text-indigo-600 hover:text-indigo-900">View All</a>
+    </div>
+    <div class="overflow-x-auto">
+      <table class="min-w-full divide-y divide-gray-200">
+        <thead class="bg-gray-50">
+          <tr>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">ID</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Type</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Amount</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Status</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Date</th>
+          </tr>
+        </thead>
+        <tbody class="bg-white divide-y divide-gray-200">
+          <tr *ngFor="let t of recentTransactions()">
+            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ t.id }}</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 capitalize">{{ t.type.replace('_', ' ') }}</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ t.amount | currencyEur }}</td>
+            <td class="px-6 py-4 whitespace-nowrap">
+              <span [class]="t.status === 'completed' ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-800'" class="px-2 py-1 text-xs font-medium rounded-full">
+                {{ t.status }}
+              </span>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ t.date | date:'short' }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
